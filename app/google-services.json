@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "246144557436",
+    "project_id": "amad-b1de7",
+    "storage_bucket": "amad-b1de7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:246144557436:android:7ec1d0cf09c3d7eafc04f9",
+        "android_client_info": {
+          "package_name": "com.s10plus.amad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "246144557436-98741tv9p9gf1onmm57q2mepkeaevlrk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBi0G87o6DmqRU-wtwXajCIsB53LdpYwXA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "246144557436-98741tv9p9gf1onmm57q2mepkeaevlrk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

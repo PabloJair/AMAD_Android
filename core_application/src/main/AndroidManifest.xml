@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.s10plus.core_application">
+    <application>
+        <activity
+            android:name=".activities.ViewActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.s10plus.becas.viewActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

@@ -1,0 +1,4 @@
+include ':app'
+include ':core_application'
+
+rootProject.name = "AMAD"

@@ -1,0 +1,386 @@
+{
+  "views": [
+    {
+      "body": {
+        "id_action": "1",
+        "layout": {
+          "childs": [
+            {
+              "properties": [
+                {
+                  "key": "URL_IMAGE",
+                  "value": "https://firebasestorage.googleapis.com/v0/b/amad-b1de7.appspot.com/o/logo_becas.png?alt=media&token=100faa92-1dc3-4be1-a34d-79dd30d69097"
+                }
+              ],
+              "text": "",
+              "textColor": "#000000",
+              "typeComponent": "image"
+            },
+            {
+              "properties": [
+                {
+                  "key": "MARGIN",
+                  "value": "30 10 10 10"
+                },
+                {
+                  "key": "SIZE",
+                  "value": "-1 -2"
+                },
+                {
+                  "key": "TEXT",
+                  "value": "El horario de Atención de nuestro  Call Center es de: 9:00 -18:00 hrs. Por favor intente alguna de las siguientes opciones de nuestro Menú Digital"
+                }
+              ],
+              "text": "",
+              "textColor": "#000000",
+              "typeComponent": "textview"
+            },
+            {
+              "properties": [
+                {
+                  "key": "URL_IMAGE",
+                  "value": "https://firebasestorage.googleapis.com/v0/b/amad-b1de7.appspot.com/o/5.png?alt=media&token=3dae3b31-f1ef-4ec9-81a3-8c54185caf04"
+                },
+                {
+                  "key": "MARGIN",
+                  "value": "10 10 10 10"
+                },
+                {
+                  "key": "SIZE",
+                  "value": "-1 -2"
+                },
+                {
+                  "key": "TEXT",
+                  "value": "Becas de Educación Basica"
+                },
+                {
+                  "key": "COLOR_GRADIENT",
+                  "value": "#0c231e #071411"
+                },
+                {
+                  "key": "COLOR",
+                  "value": "#FFFFFF"
+                },
+                {
+                  "key": "CORNER_RADIUS",
+                  "value": "30"
+                }
+              ],
+              "text": "",
+              "textColor": "#000000",
+              "typeComponent": "BUTTON_IMAGE"
+            },
+            {
+              "properties": [
+                {
+                  "key": "URL_IMAGE",
+                  "value": "https://firebasestorage.googleapis.com/v0/b/amad-b1de7.appspot.com/o/5.png?alt=media&token=3dae3b31-f1ef-4ec9-81a3-8c54185caf04"
+                },
+                {
+                  "key": "MARGIN",
+                  "value": "10 10 10 10"
+                },
+                {
+                  "key": "SIZE",
+                  "value": "-1 -2"
+                },
+                {
+                  "key": "TEXT",
+                  "value": "Becas de Educación Media Superior"
+                },
+                {
+                  "key": "COLOR_GRADIENT",
+                  "value": "#0c231e #071411"
+                },
+                {
+                  "key": "COLOR",
+                  "value": "#FFFFFF"
+                },
+                {
+                  "key": "CORNER_RADIUS",
+                  "value": "30"
+                }
+              ],
+              "text": "",
+              "textColor": "#000000",
+              "typeComponent": "BUTTON_IMAGE"
+            },
+            {
+              "properties": [
+                {
+                  "key": "URL_IMAGE",
+                  "value": "https://firebasestorage.googleapis.com/v0/b/amad-b1de7.appspot.com/o/5.png?alt=media&token=3dae3b31-f1ef-4ec9-81a3-8c54185caf04"
+                },
+                {
+                  "key": "MARGIN",
+                  "value": "10 10 10 10"
+                },
+                {
+                  "key": "SIZE",
+                  "value": "-1 -2"
+                },
+                {
+                  "key": "TEXT",
+                  "value": "Becas Jovenes Escribiendo el futuro"
+                },
+                {
+                  "key": "COLOR_GRADIENT",
+                  "value": "#0c231e #071411"
+                },
+                {
+                  "key": "COLOR",
+                  "value": "#FFFFFF"
+                },
+                {
+                  "key": "CORNER_RADIUS",
+                  "value": "30"
+                }
+              ],
+              "text": "",
+              "textColor": "#000000",
+              "typeComponent": "BUTTON_IMAGE"
+            },
+            {
+              "properties": [
+                {
+                  "key": "URL_IMAGE",
+                  "value": "https://firebasestorage.googleapis.com/v0/b/amad-b1de7.appspot.com/o/5.png?alt=media&token=3dae3b31-f1ef-4ec9-81a3-8c54185caf04"
+                },
+                {
+                  "key": "MARGIN",
+                  "value": "10 10 10 10"
+                },
+                {
+                  "key": "SIZE",
+                  "value": "-1 -2"
+                },
+                {
+                  "key": "TEXT",
+                  "value": "Becas Elisa Acuña"
+                },
+                {
+                  "key": "COLOR_GRADIENT",
+                  "value": "#0c231e #071411"
+                },
+                {
+                  "key": "COLOR",
+                  "value": "#FFFFFF"
+                },
+                {
+                  "key": "CORNER_RADIUS",
+                  "value": "30"
+                }
+              ],
+              "text": "",
+              "textColor": "#000000",
+              "typeComponent": "BUTTON_IMAGE"
+            },
+            {
+              "properties": [
+                {
+                  "key": "URL_IMAGE",
+                  "value": "https://firebasestorage.googleapis.com/v0/b/amad-b1de7.appspot.com/o/5.png?alt=media&token=3dae3b31-f1ef-4ec9-81a3-8c54185caf04"
+                },
+                {
+                  "key": "MARGIN",
+                  "value": "10 10 10 10"
+                },
+                {
+                  "key": "SIZE",
+                  "value": "-1 -2"
+                },
+                {
+                  "key": "TEXT",
+                  "value": "Contraloría Social"
+                },
+                {
+                  "key": "COLOR_GRADIENT",
+                  "value": "#0c231e #071411"
+                },
+                {
+                  "key": "COLOR",
+                  "value": "#FFFFFF"
+                },
+                {
+                  "key": "CORNER_RADIUS",
+                  "value": "30"
+                }
+              ],
+              "text": "",
+              "textColor": "#000000",
+              "typeComponent": "BUTTON_IMAGE"
+            },
+            {
+              "properties": [
+                {
+                  "key": "URL_IMAGE",
+                  "value": "https://firebasestorage.googleapis.com/v0/b/amad-b1de7.appspot.com/o/5.png?alt=media&token=3dae3b31-f1ef-4ec9-81a3-8c54185caf04"
+                },
+                {
+                  "key": "MARGIN",
+                  "value": "10 10 10 10"
+                },
+                {
+                  "key": "SIZE",
+                  "value": "-1 -2"
+                },
+                {
+                  "key": "TEXT",
+                  "value": "Oficina Cerca de ti"
+                },
+                {
+                  "key": "COLOR_GRADIENT",
+                  "value": "#0c231e #071411"
+                },
+                {
+                  "key": "COLOR",
+                  "value": "#FFFFFF"
+                },
+                {
+                  "key": "CORNER_RADIUS",
+                  "value": "30"
+                }
+              ],
+              "text": "",
+              "textColor": "#000000",
+              "typeComponent": "BUTTON_IMAGE"
+            },
+            {
+              "properties": [
+                {
+                  "key": "URL_IMAGE",
+                  "value": "https://firebasestorage.googleapis.com/v0/b/amad-b1de7.appspot.com/o/5.png?alt=media&token=3dae3b31-f1ef-4ec9-81a3-8c54185caf04"
+                },
+                {
+                  "key": "MARGIN",
+                  "value": "10 10 10 10"
+                },
+                {
+                  "key": "SIZE",
+                  "value": "-1 -2"
+                },
+                {
+                  "key": "TEXT",
+                  "value": "Chat en Línea"
+                },
+                {
+                  "key": "COLOR_GRADIENT",
+                  "value": "#0c231e #071411"
+                },
+                {
+                  "key": "COLOR",
+                  "value": "#FFFFFF"
+                },
+                {
+                  "key": "CORNER_RADIUS",
+                  "value": "30"
+                }
+              ],
+              "text": "",
+              "textColor": "#000000",
+              "typeComponent": "BUTTON_IMAGE"
+            },
+            {
+              "properties": [
+                {
+                  "key": "URL_IMAGE",
+                  "value": "https://gs.s10plus.com/images/logo_banner.jpeg"
+                }
+              ],
+              "text": "",
+              "textColor": "#000000",
+              "typeComponent": "image"
+            }
+          ],
+          "properties": [],
+          "typeView": "LINEAL"
+        }
+      },
+      "footer": {
+        "id_action": "1",
+        "layout": {
+          "childs": [
+            {
+              "properties": [
+                {
+                  "key": "MARGIN",
+                  "value": "30 10 10 10"
+                },
+                {
+                  "key": "SIZE",
+                  "value": "-1 -2"
+                },
+                {
+                  "key": "TEXT",
+                  "value": "Texto-1"
+                }
+              ],
+              "text": "",
+              "textColor": "#000000",
+              "typeComponent": "textview"
+            }
+          ],
+          "properties": [],
+          "typeView": "LINEAL"
+        }
+      },
+      "header": {
+        "id_action": "1",
+        "layout": {
+          "childs": [
+            {
+              "properties": [
+                {
+                  "key": "MARGIN",
+                  "value": "30 10 10 10"
+                },
+                {
+                  "key": "SIZE",
+                  "value": "-1 -2"
+                },
+                {
+                  "key": "TEXT",
+                  "value": "Texto-1"
+                }
+              ],
+              "text": "",
+              "textColor": "#000000",
+              "typeComponent": "textview"
+            }
+          ],
+          "properties": [],
+          "typeView": "LINEAL"
+        }
+      },
+      "id": "1",
+      "nameView": "",
+      "typeView": ""
+    }
+  ],
+  "preconfiguration": {
+    "url-analytics": "",
+    "sound": "www.sonido.com",
+    "splash_image": "www.google.com",
+    "splash_lottie": "www.google.com",
+    "splash_gift": "www.google.com",
+    "geolocation": {
+      "active": "true",
+      "url": "www.google.com"
+    },
+    "request_phone":{
+      "active":"true"
+    },
+    "state":{
+      "active":"true"
+    },
+    "offline": {
+      "active": true,
+      "date_update": {
+        "type": "all|date|time",
+        "date": "2",
+        "time": "5"
+      }
+    }
+  },
+  "app_id": "asdasdasdasdasd"
+}
