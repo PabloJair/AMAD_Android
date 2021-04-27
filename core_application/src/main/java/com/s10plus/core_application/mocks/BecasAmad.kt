@@ -63,7 +63,7 @@ object BecasAmad {
                         createButtonImageBecas(
                             "Chat en Línea",
                             "https://firebasestorage.googleapis.com/v0/b/amad-b1de7.appspot.com/o/1.png?alt=media&token=09e9e121-0456-4091-844a-2f6f7824f122",
-                            arrayListOf(Property(KeyProperties.OPEN_URL,
+                            arrayListOf(Property(KeyProperties.OPEN_URL_INTERNAL,
                                 "https://cariai.com/cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdWQi9LWC9za2oyQllWbmlLOWhlQ0dneFlhSTFqTzNmb2lSY3liL2MveVVVT3JlMXVTTHpEQT09?phoneNumber="))
 
 

@@ -19,6 +19,10 @@ enum class TypeComponent {
     MENU,
     @SerializedName("MENU_ITEM")
     MENU_ITEM,
+
+    @SerializedName("REDES_SOCIALES")
+    REDES_SOCIALES,
+
     @SerializedName("NONE")
     NONE
 }

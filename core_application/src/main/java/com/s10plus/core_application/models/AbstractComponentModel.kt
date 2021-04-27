@@ -15,6 +15,7 @@ import com.google.gson.annotations.Expose
 import com.s10plus.core_application.GlobalSettings
 import com.s10plus.core_application.S10PlusApplication
 import com.s10plus.core_application.activities.ViewActivity
+import com.s10plus.core_application.activities.WebViewActivity
 import com.s10plus.core_application.base_ui.ActivityUtils
 import com.s10plus.core_application.utils.JsonUtil
 import kotlinx.android.parcel.RawValue
@@ -66,6 +67,10 @@ abstract class AbstractComponentModel(
     @Expose
     var openUrl: String?=null
         get()= Property.getPropertyValue(properties, KeyProperties.OPEN_URL)
+
+    @Expose
+    var openUrlInternal: String?=null
+        get()= Property.getPropertyValue(properties, KeyProperties.OPEN_URL_INTERNAL)
     abstract fun onConfigView(view: View)
 
     open fun init(view: View) {
@@ -141,6 +146,7 @@ abstract class AbstractComponentModel(
 
         openUrl?.let { goToUrl(it) }
 
+        openUrlInternal?.let { goToUrlInternal(it) }
 
 
     }
@@ -155,13 +161,19 @@ abstract class AbstractComponentModel(
         }
 
 
-
-
-
     private fun backView() =
         view?.setOnClickListener {
             S10PlusApplication.getCurrentActivity().onBackPressed()
 
+        }
+
+
+    private fun goToUrlInternal(url: String) =
+        view?.setOnClickListener {
+            S10PlusApplication.currentApplication.startActivity(
+                Intent(view!!.context, WebViewActivity::class.java)
+                    .putExtra(WebViewActivity.URL, url)
+            )
         }
 
 

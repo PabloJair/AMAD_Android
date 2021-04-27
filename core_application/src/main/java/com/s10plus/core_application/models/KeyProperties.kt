@@ -36,4 +36,7 @@ enum class KeyProperties {
     //VIEW.TEXT_ALIGNMENT_TEXT_END,
     @SerializedName("TEXT_ALIGNMENT")
     TEXT_ALIGNMENT,
+
+    @SerializedName("OPEN_URL_INTERNAL")
+    OPEN_URL_INTERNAL,
 }
