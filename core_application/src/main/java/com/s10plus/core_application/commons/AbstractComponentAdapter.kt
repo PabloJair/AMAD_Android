@@ -32,6 +32,7 @@ class AbstractComponentAdapter:JsonDeserializer<AbstractComponentModel> {
             MENU_ITEM -> context!!.deserialize(json,ButtonModel::class.java)
             NONE -> context!!.deserialize(json,ButtonModel::class.java)
             BUTTON_IMAGE -> context!!.deserialize(json,ButtonModel::class.java)
+            REDES_SOCIALES -> TODO()
         }
 
         component.typeComponent = type

@@ -24,12 +24,15 @@ class S10PlusApplication: Application(),LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun onAppDestroyed(){
+        GlobalSettings.saveInterceptorPhone(true,GlobalSettings.getNumberPhone())
+
 
 
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     fun onAppStoped(){
+        GlobalSettings.saveInterceptorPhone(true,GlobalSettings.getNumberPhone())
 
 
     }

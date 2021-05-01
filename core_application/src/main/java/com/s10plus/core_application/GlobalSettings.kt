@@ -36,8 +36,10 @@ object GlobalSettings {
 
     const val SP_INTERCEPTER_PHONE="SP_INTERCEPTER_PHONE"
     const val SP_NUMBER_PHONE="SP_NUMBER_PHONE"
-    const val PHONE_1="5511620300"
-    const val PHONE_2="8005005050"
+    const val PHONE_3="5589960060"
+
+    const val PHONE_1="5589960111"
+    const val PHONE_2="*11"
     const val CURRENT_PHONE="CURRENT_PHONE"
      var lat:Double=0.toDouble()
      var  lng:Double=0.0
