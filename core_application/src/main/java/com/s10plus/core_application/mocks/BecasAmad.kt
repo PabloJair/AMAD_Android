@@ -390,7 +390,10 @@ object BecasAmad {
                         createTitle("Bienestar Azteca"),
 
                         createButton(
-                            arrayListOf(Property(KeyProperties.TEXT, "¿Qué es Bienestar Azteca?"))
+                            arrayListOf(Property(KeyProperties.TEXT, "¿Qué es Bienestar Azteca?"),
+                                Property(KeyProperties.SEND_TO_VIEW, "8")
+
+                            )
                         ),
                         createButton(
                             arrayListOf(Property(KeyProperties.TEXT, "Etapa 1. Registro"))
@@ -461,7 +464,7 @@ object BecasAmad {
             "6", TypeView.NONE)
     }
 
-    fun ViewBienestarAzteca8(): ViewS10Plus {
+    fun ViewQueEsBienestarAzteca8(): ViewS10Plus {
 
         return ViewS10Plus(
             BodyModel(
@@ -477,69 +480,19 @@ object BecasAmad {
                                 Property(KeyProperties.SIZE, "-1 200"),
                             )
                         ),
-                        createTitle("Bienestar Azteca"),
+                        createTitle("¿Qué es bienestar azteca ?"),
 
-                        createButton(
-                            arrayListOf(Property(KeyProperties.TEXT, "¿Qué es Bienestar Azteca?"))
-                        ),
-                        createButton(
-                            arrayListOf(Property(KeyProperties.TEXT, "Etapa 1. Registro"))
-                        ),
-                        createButton(
-                            arrayListOf(Property(KeyProperties.TEXT, "Etapa 2. Recibe tu beca"))
-                        ),
-                        createButton(
+                        createText(
+                            "Derivado de la emergencia sanitaria, la Coordinación Nacional de Becas para el Bienestar Benito Juárez en conjunto con Banco Azteca, diseñamos el sitio" +
+                                    "<a href=\"https://bienestarazteca.com/\"> https://bienestarazteca.com/ </a>  para que puedas recibir tu beca de forma electrónica.",
                             arrayListOf(
+                                Property(KeyProperties.TEXT_HTML, "true"),
+
                                 Property(
-                                    KeyProperties.TEXT,
-                                    "¡Ayuda! No me puedo registrar"
-                                )
-                            )
-                        ),
-                        createButton(
-                            arrayListOf(
-                                Property(
-                                    KeyProperties.TEXT,
-                                    "No me llega el código de verificación ni al correo ni al teléfono"
-                                )
-                            )
-                        ),
-                        createButton(
-                            arrayListOf(Property(KeyProperties.TEXT, "Olvidé mi contraseña"))
-                        ),
-                        createButton(
-                            arrayListOf(
-                                Property(
-                                    KeyProperties.TEXT,
-                                    "Durante el registro el sistema no me " + "pidió tomarme la fotografía"
-                                )
-                            )
-                        ),
-                        createButton(
-                            arrayListOf(Property(KeyProperties.TEXT, "Olvidé mi contraseña"))
-                        ),
-                        createButton(
-                            arrayListOf(
-                                Property(
-                                    KeyProperties.TEXT,
-                                    "Mi colonia y/o mi código postal no\n" + "aparece en el listado desplegable"
-                                )
-                            )
-                        ),
-                        createButton(
-                            arrayListOf(
-                                Property(
-                                    KeyProperties.TEXT,
-                                    "Durante el registro el sistema no me " + "pidió tomarme la fotografía"
-                                )
-                            )
-                        ),
-                        createButton(
-                            arrayListOf(
-                                Property(
-                                    KeyProperties.TEXT,
-                                    "¿Cuál es la vigencia del código QR y del\n" + "código de barras?"
-                                )
+                                    KeyProperties.OPEN_URL,
+                                    "https://bienestarazteca.com/"
+                                ),
+
                             )
                         ),
 
@@ -548,7 +501,7 @@ object BecasAmad {
                 }
             ), createFooterBack(),
             createHeader(),
-            "6", TypeView.NONE)
+            "8", TypeView.NONE)
     }
 
 
