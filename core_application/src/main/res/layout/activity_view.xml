@@ -22,16 +22,13 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"
+            android:id="@+id/body"
+
             app:layout_constraintBottom_toTopOf="@+id/rootFooter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/header" >
 
-            <LinearLayout
-                android:id="@+id/body"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
 
         </ScrollView>
 

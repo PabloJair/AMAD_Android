@@ -14,6 +14,10 @@ class TextViewModel : AbstractComponentModel() {
         get() = Property.getPropertyValue(properties, KeyProperties.TEXT_ALIGNMENT)?.toInt()
             ?: View.TEXT_ALIGNMENT_TEXT_START
 
+
+    var type_html: Boolean = false
+        get() = Property.getPropertyValue(properties, KeyProperties.TEXT_HTML)?.isNotEmpty()
+            ?:false
     override fun onConfigView(view: View) {
         val view = view as TextViewS1Plus
 

@@ -37,6 +37,20 @@ enum class KeyProperties {
     @SerializedName("TEXT_ALIGNMENT")
     TEXT_ALIGNMENT,
 
+    @SerializedName("TEXT_LINK")
+    TEXT_LINK,
+
     @SerializedName("OPEN_URL_INTERNAL")
     OPEN_URL_INTERNAL,
+
+    @SerializedName("FACEBOOK_URL")
+    FACEBOOK_URL,
+
+    @SerializedName("TWITTER_URL")
+    TWITTER_URL,
+
+    @SerializedName("YOUTUBE_URL")
+    YOUTUBE_URL,
+    @SerializedName("TEXT_HTML")
+    TEXT_HTML,
 }

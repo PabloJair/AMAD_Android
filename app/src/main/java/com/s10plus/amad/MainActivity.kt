@@ -1,6 +1,7 @@
 package com.s10plus.amad
 
 import android.content.Intent
+import android.os.AsyncTask
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.firebase.firestore.ktx.firestore
@@ -45,7 +46,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
 
         BecasAmad.MenuHome().body.layout.let {
-            FactoryUI.createLayout(this,it,binding.body)
+            FactoryUI.createBody(this,it,binding.body)
         }
 
        /* view?.body?.layout?.let {
@@ -59,11 +60,28 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun setupFooter() {
 
        BecasAmad.MenuHome().footer.layout.let {
-           FactoryUI.createLayout(this,it,binding.rootFooter)
+           FactoryUI.createFooter(this,it,binding.rootFooter)
        }
 
-    }
+        AsyncTask.execute {
+            Thread.sleep(3000)
+            this.runOnUiThread {
+                binding.body.smoothScrollTo(0,binding.body.bottom)
 
+            }
+
+        }
+
+    }
+    override fun onResume() {
+        super.onResume()
+
+        FactoryUI.rootViewBody = binding.body
+        FactoryUI.rootViewFooter = binding.rootFooter
+
+        // FactoryUI.rootViewHeader = binding.
+
+    }
     override fun setupViewModel() {
     }
 

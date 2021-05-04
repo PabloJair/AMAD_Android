@@ -30,7 +30,69 @@ object Mocks {
                     Property(KeyProperties.TEXT, text),
                     Property(KeyProperties.COLOR_GRADIENT, "#0c231e #071411"),
                     Property(KeyProperties.COLOR, "#FFFFFF"),
-                    Property(KeyProperties.CORNER_RADIUS, "10")
+                    Property(KeyProperties.CORNER_RADIUS, "10"),
+
+
+                )
+            )
+
+            this.properties.addAll(properties)
+        }
+
+    }
+
+    fun createButtonCALL(
+        text: String = "",
+        url_image: String,
+        properties: ArrayList<Property> = arrayListOf()
+    ): ButtonModel {
+        return ButtonModel().apply {
+
+            this.typeComponent = TypeComponent.BUTTON_IMAGE
+
+
+            this.properties.addAll(
+                arrayListOf(
+                    Property(KeyProperties.URL_IMAGE, url_image),
+                    Property(KeyProperties.MARGIN, "10 10 10 10"),
+                    Property(KeyProperties.SIZE, "-1 -2"),
+                    Property(KeyProperties.TEXT, text),
+                    Property(KeyProperties.COLOR_GRADIENT, "#206251 #246D5A"),
+                    Property(KeyProperties.COLOR, "#FFFFFF"),
+                    Property(KeyProperties.CORNER_RADIUS, "10"),
+
+
+                    )
+            )
+
+            this.properties.addAll(properties)
+        }
+
+    }
+    fun createButtonNS(
+        text: String = "",
+        url_image: String,
+        properties: ArrayList<Property> = arrayListOf()
+    ): ButtonNSModel {
+        return ButtonNSModel().apply {
+
+            this.typeComponent = TypeComponent.REDES_SOCIALES
+
+
+            this.properties.addAll(
+                arrayListOf(
+                    Property(KeyProperties.URL_IMAGE, url_image),
+                    Property(KeyProperties.MARGIN, "10 10 10 10"),
+                    Property(KeyProperties.SIZE, "-1 -2"),
+                    Property(KeyProperties.TEXT, text),
+                    Property(KeyProperties.COLOR_GRADIENT, "#5795DF #1777E8"),
+                    Property(KeyProperties.COLOR, "#FFFFFF"),
+                    Property(KeyProperties.CORNER_RADIUS, "10"),
+                    Property(KeyProperties.OPEN_URL, "OK"),
+
+                    Property(KeyProperties.FACEBOOK_URL, "https://www.facebook.com/BecasBenito/"),
+                    Property(KeyProperties.TWITTER_URL, "https://twitter.com/BecasBenito"),
+                    Property(KeyProperties.YOUTUBE_URL, "https://www.youtube.com/becasbenitojuarezoficial"),
                 )
             )
 
@@ -74,15 +136,19 @@ object Mocks {
         }
     }
 
-    fun createText(text: String = ""): TextViewModel {
+    fun createText(text: String = "",properties: ArrayList<Property> = arrayListOf()): TextViewModel {
         return TextViewModel().apply {
 
             this.typeComponent = TypeComponent.TEXTVIEW
-            this.properties = arrayListOf(
+            this.properties.addAll(arrayListOf(
                 Property(KeyProperties.MARGIN, "10 10 10 10"),
                 Property(KeyProperties.SIZE, "-1 -2"),
+                Property(KeyProperties.SIZE_TEXT, "12"),
+                Property(KeyProperties.SIZE_TEXT, "12"),
+
                 Property(KeyProperties.TEXT, text),
-            )
+            ))
+            this.properties.addAll(properties)
 
 
         }

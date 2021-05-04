@@ -1,7 +1,9 @@
 package com.s10plus.core_application.activities
 
 
+import android.os.AsyncTask
 import com.s10plus.core_application.R
+import com.s10plus.core_application.S10PlusApplication
 import com.s10plus.core_application.base_ui.BaseActivity
 import com.s10plus.core_application.databinding.ActivityViewBinding
 import com.s10plus.core_application.models.ViewS10Plus
@@ -25,19 +27,31 @@ class ViewActivity : BaseActivity<ActivityViewBinding>(R.layout.activity_view) {
 
     override fun setupObserver() {
     }
+    override fun onResume() {
+        super.onResume()
 
+        FactoryUI.rootViewBody = binding.body
+        FactoryUI.rootViewFooter = binding.rootFooter
+
+       // FactoryUI.rootViewHeader = binding.
+
+    }
     override fun setupBody() {
 
         view.body.layout.let {
-            FactoryUI.createLayout(this,it,binding.body)
+            FactoryUI.createBody(this,it,binding.body)
 
         }
+
+
+
+
 
     }
 
     override fun setupFooter() {
         view.footer.layout.let {
-            FactoryUI.createLayout(this,it,binding.rootFooter)
+            FactoryUI.createFooter(this,it,binding.rootFooter)
 
         }
 

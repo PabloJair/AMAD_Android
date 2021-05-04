@@ -29,7 +29,8 @@ object GlobalSettings {
              BecasAmad.ViewBecasJovenesEscribiendoElFuturo3(),
              BecasAmad.ViewBecasElisaAcuña4(),
              BecasAmad.ViewControloriaSocial5(),
-             BecasAmad.ViewBienestarAzteca6()
+             BecasAmad.ViewBienestarAzteca6(),
+             BecasAmad.ViewBecasDeEducacionMediaIG7()
          )
      )
 

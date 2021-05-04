@@ -25,50 +25,51 @@ abstract class AbstractComponentModel(
     var properties: @RawValue ArrayList<Property> = arrayListOf()
 ) {
 
+    @Expose(serialize = false)
     var typeComponent: TypeComponent = TypeComponent.NONE
-    @Expose
+    @Expose(serialize = false)
     var text: String = ""
         get() = Property.getPropertyValue(properties, KeyProperties.TEXT) ?: ""
-    @Expose
+    @Expose(serialize = false)
     var textColor = ""
         get() = Property.getPropertyValue(properties, KeyProperties.COLOR) ?: "#000000"
-    @Expose
+    @Expose(serialize = false)
     var padding: List<Int>? = null
         get() = Property.getProperty(properties, KeyProperties.PADDING)?.valueToIntArray(" ")
-    @Expose
+    @Expose(serialize = false)
     var size: List<Int>? = null
         get() = Property.getProperty(properties, KeyProperties.SIZE)?.valueToIntArray(" ")
-    @Expose
+    @Expose(serialize = false)
     var margin: List<Int>? = null
         get() = Property.getProperty(properties, KeyProperties.MARGIN)?.valueToIntArray(" ")
-    @Expose
+    @Expose(serialize = false)
     var cornerRadius: String? = null
         get() = Property.getProperty(properties, KeyProperties.CORNER_RADIUS)?.value
-    @Expose
+    @Expose(serialize = false)
     var background: String? = null
         get() = Property.getPropertyValue(properties, KeyProperties.BACKGROUND)
-    @Expose
+    @Expose(serialize = false)
     var gradientBackground: List<Int>? = null
         get() = Property.getProperty(properties, KeyProperties.COLOR_GRADIENT)
             ?.split(" ")?.map { Color.parseColor(it) }
-    @Expose
+    @Expose(serialize = false)
     private var view: View? = null
 
-    @Expose
+    @Expose(serialize = false)
     var sendToView: String?=null
         get()= Property.getPropertyValue(properties, KeyProperties.SEND_TO_VIEW)
 
 
-    @Expose
+    @Expose(serialize = false)
     var backView: String?=null
         get()= Property.getPropertyValue(properties, KeyProperties.BACK_VIEW)
 
 
-    @Expose
+    @Expose(serialize = false)
     var openUrl: String?=null
         get()= Property.getPropertyValue(properties, KeyProperties.OPEN_URL)
 
-    @Expose
+    @Expose(serialize = false)
     var openUrlInternal: String?=null
         get()= Property.getPropertyValue(properties, KeyProperties.OPEN_URL_INTERNAL)
     abstract fun onConfigView(view: View)
@@ -137,51 +138,55 @@ abstract class AbstractComponentModel(
         sendToView?.let {
             val viewS10Plus =  GlobalSettings.getView(it)
             if(viewS10Plus!=null){
-                goTo(viewS10Plus)
+                goTo(viewS10Plus,view)
             }
         }
 
-        backView?.let { backView() }
+        backView?.let { backView(view) }
 
 
-        openUrl?.let { goToUrl(it) }
+        openUrl?.let { goToUrl(it,view) }
 
-        openUrlInternal?.let { goToUrlInternal(it) }
+        openUrlInternal?.let { goToUrlInternal(it,view) }
 
 
     }
 
-    private fun goTo(viewS10Plus: ViewS10Plus)=
-        view?.setOnClickListener {
-            S10PlusApplication.currentApplication.startActivity(
-                Intent(view!!.context, ViewActivity::class.java)
-                    .putExtra(ViewActivity.VIEWS10PLUS, JsonUtil.toJson(viewS10Plus))
-            )
+    companion object{
+         fun goTo(viewS10Plus: ViewS10Plus,view: View?)=
+            view?.setOnClickListener {
+                S10PlusApplication.currentApplication.startActivity(
+                    Intent(view!!.context, ViewActivity::class.java)
+                        .putExtra(ViewActivity.VIEWS10PLUS, JsonUtil.toJson(viewS10Plus))
+                )
 
-        }
-
-
-    private fun backView() =
-        view?.setOnClickListener {
-            S10PlusApplication.getCurrentActivity().onBackPressed()
-
-        }
+            }
 
 
-    private fun goToUrlInternal(url: String) =
-        view?.setOnClickListener {
-            S10PlusApplication.currentApplication.startActivity(
-                Intent(view!!.context, WebViewActivity::class.java)
-                    .putExtra(WebViewActivity.URL, url)
-            )
-        }
+         fun backView(view: View?) =
+            view?.setOnClickListener {
+                S10PlusApplication.getCurrentActivity().onBackPressed()
+
+            }
 
 
-    private fun goToUrl(url: String) =
-        view?.setOnClickListener {
-            ActivityUtils.openWebView(view!!.context,url)
+         fun goToUrlInternal(url: String,view: View?) =
+            view?.setOnClickListener {
+                S10PlusApplication.currentApplication.startActivity(
+                    Intent(view.context, WebViewActivity::class.java)
+                        .putExtra(WebViewActivity.URL, url)
+                )
+            }
 
-        }
+
+         fun goToUrl(url: String,view: View?) =
+            view?.setOnClickListener {
+                ActivityUtils.openWebView(view!!.context,url)
+
+            }
+    }
+
+
 
 
 
