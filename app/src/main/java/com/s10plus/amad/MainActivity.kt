@@ -52,7 +52,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         }
         binding.CA.setOnClickListener {
 
-            //ActivityUtils.openWebView(this,"https://play.google.com/store/apps/details?id=uk.co.separatereality.vadsa.mobile.myExis")
+            ActivityUtils.openWebView(this,"https://cariai.com/cVhlaTdqekZaZkkyL1VFTis5dDdMaFpwOEYxczgxNHBKSGI1MVNXWk5GM3dlY2c9")
         }
         binding.RA.setOnClickListener {
 
