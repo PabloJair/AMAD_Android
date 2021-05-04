@@ -53,4 +53,6 @@ enum class KeyProperties {
     YOUTUBE_URL,
     @SerializedName("TEXT_HTML")
     TEXT_HTML,
+    @SerializedName("OPEN_EMAIL")
+    OPEN_EMAIL,
 }

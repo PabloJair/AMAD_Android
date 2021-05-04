@@ -72,6 +72,10 @@ abstract class AbstractComponentModel(
     @Expose(serialize = false)
     var openUrlInternal: String?=null
         get()= Property.getPropertyValue(properties, KeyProperties.OPEN_URL_INTERNAL)
+
+    @Expose(serialize = false)
+    var openEmail: String?=null
+        get()= Property.getPropertyValue(properties, KeyProperties.OPEN_EMAIL)
     abstract fun onConfigView(view: View)
 
     open fun init(view: View) {
@@ -148,6 +152,7 @@ abstract class AbstractComponentModel(
         openUrl?.let { goToUrl(it,view) }
 
         openUrlInternal?.let { goToUrlInternal(it,view) }
+        openEmail?.let { goToEmail(it,view) }
 
 
     }
@@ -182,6 +187,12 @@ abstract class AbstractComponentModel(
          fun goToUrl(url: String,view: View?) =
             view?.setOnClickListener {
                 ActivityUtils.openWebView(view!!.context,url)
+
+            }
+
+        fun goToEmail(url: String,view: View?) =
+            view?.setOnClickListener {
+                ActivityUtils.openEmail(view!!.context,url)
 
             }
     }

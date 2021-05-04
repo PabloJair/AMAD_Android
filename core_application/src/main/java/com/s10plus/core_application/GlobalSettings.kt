@@ -5,7 +5,7 @@ import com.blankj.utilcode.util.GsonUtils
 import com.blankj.utilcode.util.SPUtils
 import com.google.gson.reflect.TypeToken
 import com.s10plus.core_application.configuration.Configuration
-import com.s10plus.core_application.mocks.BecasAmad
+import com.s10plus.core_application.mocks.*
 import com.s10plus.core_application.models.UserInformation
 import com.s10plus.core_application.models.ViewS10Plus
 import java.util.*
@@ -26,12 +26,12 @@ object GlobalSettings {
          views = arrayListOf(BecasAmad.MenuHome(),
              BecasAmad.ViewBecasDeEducacion1(),
              BecasAmad.ViewBecasDeEducacionMedia2(),
-             BecasAmad.ViewBecasJovenesEscribiendoElFuturo3(),
-             BecasAmad.ViewBecasElisaAcuña4(),
-             BecasAmad.ViewControloriaSocial5(),
-             BecasAmad.ViewBienestarAzteca6(),
              BecasAmad.ViewBecasDeEducacionMediaIG7(),
-             BecasAmad.ViewQueEsBienestarAzteca8()
+             *(BecasAmadMenuBienestarAzteca.all()).toTypedArray(),
+             *(ViewsBJEF.all()).toTypedArray(),
+             *(ViewElisa.all()).toTypedArray(),
+             *(ViewsControloriasocial.all()).toTypedArray()
+
 
 
          )
