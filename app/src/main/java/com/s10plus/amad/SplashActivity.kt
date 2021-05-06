@@ -5,8 +5,10 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.AsyncTask
 import android.os.Build
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.net.toUri
@@ -163,8 +165,6 @@ class SplashActivity:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
 
         }
 
-
-
         S10PlusApplication.currentApplication.startActivity(
             Intent(this, MainActivity::class.java))
 
@@ -196,31 +196,42 @@ class SplashActivity:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
 
     private fun validatePermissionAppStep2(){
 
-        var permission = arrayOf(
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.READ_PHONE_STATE,
-            Manifest.permission.ANSWER_PHONE_CALLS,
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.canDrawOverlays(this)) {
+                val intent = Intent(
+                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:" + this.packageName)
+                )
+                startActivityForResult(intent, 12345)
+            } else {
+                //Permission Granted-System will work
+            }
+        }
+
+        var permission = arrayListOf(
+
             Manifest.permission.READ_CALL_LOG,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION
 
             )
 
-        var answare =if((Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)){rxPermissions.isGranted(
-            Manifest.permission.ANSWER_PHONE_CALLS
-        )} else true
+       if((Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)){
+           permission.add(Manifest.permission.ANSWER_PHONE_CALLS)
+        }else{
+           permission.add(Manifest.permission.READ_PHONE_STATE)
+           permission.add(Manifest.permission.CALL_PHONE)
 
-        if(    rxPermissions.isGranted(Manifest.permission.READ_PHONE_STATE)
-            && rxPermissions.isGranted(Manifest.permission.CALL_PHONE)
-            && answare
-            && rxPermissions.isGranted(Manifest.permission.READ_CALL_LOG)
-            && rxPermissions.isGranted(Manifest.permission.ACCESS_FINE_LOCATION)
-            && rxPermissions.isGranted(Manifest.permission.ACCESS_COARSE_LOCATION)
+       }
 
+        var validatePermission = permission.map { rxPermissions.isGranted(it) }
 
-        ){
+        if( !validatePermission.contains(false)) {
             executeLocationStep3()
             return
         }
+
         if(countPermission==0){
             executeLocationStep3()
             return
@@ -228,11 +239,11 @@ class SplashActivity:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
 
         var permissionValidate =0
 
-        var permissions =
-            if((Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)){ permission } else{ permission }
+
+        rxPermissions.setLogging(true)
 
         rxPermissions.request(
-            *permissions
+            *permission.toTypedArray()
         ).subscribe {
             if (!it){
                 if(showMessage) {

@@ -12,6 +12,7 @@ import android.os.IBinder
 import android.telecom.TelecomManager
 import androidx.core.content.ContextCompat
 import com.blankj.utilcode.util.LogUtils
+import com.s10plus.core_application.navigation.AppNavigation
 import com.s10plus.core_application.utils.Device
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -26,25 +27,23 @@ class CallReceiver:PhoneCallReceiver() {
         if(number == null){
             return
         }
-     if(number ==GlobalSettings.PHONE_1 || number==  GlobalSettings.PHONE_2){
+     if(GlobalSettings.getPhonesInterceptor().contains(number)){
             if(GlobalSettings.getInterceptorPhone()) {
 
                // GlobalSettings.setCurrentPhone(Device.getLineNumberPhone(ctx!!))
 
                 Thread.sleep(1000);
 
-               /* Observable.fromCallable {
+                Observable.fromCallable {
                     endCall(ctx!!)
-                    //var intent = AppNavigation.openSplash(ctx);
+                    val intent = AppNavigation.openSplash(ctx);
                     intent.addFlags(
                         Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or
                                 FLAG_ACTIVITY_NEW_TASK or
                                 Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
                     )
                     S10PlusApplication.currentApplication.startActivity(intent)
-
-                    //openApp(ctx, "com.s10plus.becas.benitojuarez")
-                }.observeOn(AndroidSchedulers.mainThread()).subscribe()*/
+                }.observeOn(AndroidSchedulers.mainThread()).subscribe()
 
 
             }else
