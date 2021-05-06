@@ -10,7 +10,7 @@ class FileViewModel: BaseViewModel() {
     private var service = serverRetrofit.getClientNoUnsafe(FileService::class.java)
 
 
-    fun getFile(url:String){
+    fun saveFile(url:String){
         setupSubscribe(service.downloadFile(url), {
             Storage.writeResponseBodyToDisk(it,"sound.mp3");
             Log.d(TAG,"OK")

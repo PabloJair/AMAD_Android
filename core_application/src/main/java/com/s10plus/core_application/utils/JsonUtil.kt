@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.s10plus.core_application.commons.AbstractComponentAdapter
 import com.s10plus.core_application.commons.AbstractLayoutAdapter
+import com.s10plus.core_application.configuration.Configuration
 import com.s10plus.core_application.models.AbstractComponentModel
 import com.s10plus.core_application.models.AbstractLayoutModel
 import com.s10plus.core_application.models.ViewS10Plus
@@ -30,6 +31,12 @@ object JsonUtil {
             .setPrettyPrinting().create().fromJson(json,ViewS10Plus::class.java)
     }
 
+    fun fromConfiguration(json: String): Configuration {
 
+        return  GsonBuilder()
+            .registerTypeAdapter(AbstractLayoutModel::class.java, AbstractLayoutAdapter())
+            .registerTypeAdapter(AbstractComponentModel::class.java, AbstractComponentAdapter())
+            .setPrettyPrinting().create().fromJson(json,Configuration::class.java)
+    }
 
 }

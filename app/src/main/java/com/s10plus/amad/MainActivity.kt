@@ -9,6 +9,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.s10plus.amad.databinding.ActivityMainBinding
+import com.s10plus.core_application.GlobalSettings
 import com.s10plus.core_application.S10PlusApplication
 import com.s10plus.core_application.base_ui.BaseActivity
 import com.s10plus.core_application.commons.AbstractComponentAdapter
@@ -30,8 +31,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         setupHeader()
         setupBody()
         setupFooter()
-
-
     }
 
     override fun setupHeader() {
@@ -45,9 +44,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun setupBody() {
 
 
-        BecasAmad.MenuHome().body.layout.let {
+        GlobalSettings.config.views.find { viewS10Plus -> viewS10Plus.id =="0" }?.body?.
+        layout?.let {
             FactoryUI.createBody(this,it,binding.body)
         }
+
 
        /* view?.body?.layout?.let {
             FactoryUI.createLayout(this,it,binding.body)
@@ -59,9 +60,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun setupFooter() {
 
-       BecasAmad.MenuHome().footer.layout.let {
-           FactoryUI.createFooter(this,it,binding.rootFooter)
-       }
+        GlobalSettings.config.views.find { viewS10Plus -> viewS10Plus.id =="0" }?.footer?.
+        layout?.let {
+            FactoryUI.createFooter(this,it,binding.rootFooter)
+        }
+
+
 
         AsyncTask.execute {
             Thread.sleep(3000)

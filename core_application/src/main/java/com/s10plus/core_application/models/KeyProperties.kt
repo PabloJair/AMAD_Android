@@ -55,4 +55,7 @@ enum class KeyProperties {
     TEXT_HTML,
     @SerializedName("OPEN_EMAIL")
     OPEN_EMAIL,
+    @SerializedName("SEND_ANALYTICS")
+    SEND_ANALYTICS,
+
 }

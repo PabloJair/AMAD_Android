@@ -31,12 +31,14 @@ data class Preconfiguration(
     @SerializedName("state")
     var state: State = State(),
     @SerializedName("url-analytics")
-    var urlAnalytics: String = ""
+    var urlAnalytics: String = "",
+
+
 )
 
 data class Geolocation(
     @SerializedName("active")
-    var active: String = "",
+    var active: Boolean = true,
     @SerializedName("url")
     var url: String = ""
 )
@@ -50,12 +52,14 @@ data class Offline(
 
 data class RequestPhone(
     @SerializedName("active")
-    var active: String = ""
+    var active: Boolean = true,
+    @SerializedName("interceptorsPhone")
+    var interceptorsPhone: ArrayList<String> = arrayListOf()
 )
 
 data class State(
     @SerializedName("active")
-    var active: String = ""
+    var active: Boolean = true
 )
 
 data class DateUpdate(

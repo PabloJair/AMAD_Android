@@ -4,11 +4,12 @@ import android.content.Context
 import com.blankj.utilcode.util.GsonUtils
 import com.blankj.utilcode.util.SPUtils
 import com.google.gson.reflect.TypeToken
-import com.s10plus.core_application.configuration.Configuration
+import com.s10plus.core_application.configuration.*
 import com.s10plus.core_application.mocks.*
 import com.s10plus.core_application.models.UserInformation
 import com.s10plus.core_application.models.ViewS10Plus
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 object GlobalSettings {
@@ -20,9 +21,18 @@ object GlobalSettings {
     const val TOKEN="TOKEN"
     const val SERIAL="SERIAL"
     const val STATE="STATE"
-
+    const val ISCONFIG="ISCONFIG"
+    const val PHONES="PHONES"
 
      var config:Configuration =Configuration(
+
+         preconfiguration = Preconfiguration(
+             geolocation = Geolocation(active = true),
+             state =  State(true),
+             requestPhone = RequestPhone(active = true,
+                 arrayListOf("5511620300","8005005050")),
+             sound = "https://firebasestorage.googleapis.com/v0/b/amad-b1de7.appspot.com/o/intro.mp3?alt=media&token=832e01b7-38ab-40c4-842f-85af9ea9d768"
+         ),
          views = arrayListOf(BecasAmad.MenuHome(),
              BecasAmad.ViewBecasDeEducacion1(),
              BecasAmad.ViewBecasDeEducacionMedia2(),
@@ -54,16 +64,12 @@ object GlobalSettings {
 
     private var userInformation:UserInformation?=null
 
-    fun setSession(userInformation: UserInformation){
-        SPUtils.getInstance(SP_S10PLUS, Context.MODE_PRIVATE).put(
-            USER, GsonUtils.toJson(
-                userInformation
-            )
-        )
 
+    fun setIsConfig(isConfig:Boolean)=
+        SPUtils.getInstance(SP_S10PLUS, Context.MODE_PRIVATE).put(ISCONFIG, isConfig)
 
-    }
-
+    fun isConfig():Boolean=
+        SPUtils.getInstance(SP_S10PLUS, Context.MODE_PRIVATE).getBoolean(ISCONFIG,false)
 
 
     fun  getView(id:String):ViewS10Plus?=config.views.find { it.id == id }
@@ -131,6 +137,13 @@ object GlobalSettings {
         this.serial = serial
     }
 
+    fun getPhonesInterceptor():Set<String> =
+    SPUtils.getInstance(SP_S10PLUS, Context.MODE_PRIVATE).getStringSet(PHONES)
+
+    fun setPhones(phones: ArrayList<String>){
+        SPUtils.getInstance(SP_S10PLUS, Context.MODE_PRIVATE).put(PHONES, phones.toMutableSet())
+
+    }
 
 
     fun getSerial():String=

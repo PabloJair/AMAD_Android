@@ -20,6 +20,8 @@ data class ViewS10Plus(
         @SerializedName("nameView")
         var nameView: TypeView=TypeView.NONE,
         @SerializedName("order")
-        var order: Int=0
+        var order: Int=0,
+        @SerializedName("start")
+        var start: Boolean=false
 ): Parcelable
 
