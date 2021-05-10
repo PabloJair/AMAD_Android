@@ -58,4 +58,10 @@ enum class KeyProperties {
     @SerializedName("SEND_ANALYTICS")
     SEND_ANALYTICS,
 
+    @SerializedName("SHOW_FOR_TIME")
+    SHOW_FOR_TIME,
+    @SerializedName("CALL")
+    CALL,
+
+
 }

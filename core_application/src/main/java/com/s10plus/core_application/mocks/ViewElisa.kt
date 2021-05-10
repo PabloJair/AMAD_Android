@@ -25,7 +25,9 @@ object ViewElisa {
                         Mocks.createTitle("Becas Elisa Acuña"),
                         Mocks.createButton(
                             arrayListOf(Property(KeyProperties.TEXT, "Información General"),
-                                    Property(KeyProperties.SEND_TO_VIEW, "19")
+                                    Property(KeyProperties.SEND_TO_VIEW, "19"),
+                                Property(KeyProperties.SEND_ANALYTICS, "17|nav|CLICK/SUB_MENU|Información General|Información General_BEA",)
+
 
                             )
                         ),
@@ -35,7 +37,9 @@ object ViewElisa {
                                 Property(
                                     KeyProperties.OPEN_URL,
                                     "https://www.gob.mx/becasbenitojuarez/articulos/becas-elisa-acuna"
-                                )
+                                ),
+                                Property(KeyProperties.SEND_ANALYTICS, "16|nav|CLICK/SUB_MENU|https://www.gob.mx/becasbenitojuarez/articulos/becas-elisa-acuna|Convocatoria_BEA",)
+
                             )
                         ),
                         Mocks.createButton(
@@ -44,7 +48,11 @@ object ViewElisa {
                                 Property(
                                     KeyProperties.OPEN_URL,
                                     "https://www.gob.mx/becasbenitojuarez/articulos/becas-elisa-acuna"
-                                ))
+                                ),
+                                Property(KeyProperties.SEND_ANALYTICS, "15|nav|CLICK/SUB_MENU|https://www.gob.mx/becasbenitojuarez/articulos/becas-elisa-acuna|Resultados_BEA",)
+
+                            )
+
                         ),
 
 

@@ -11,7 +11,9 @@ import com.google.gson.GsonBuilder
 import com.s10plus.amad.databinding.ActivityMainBinding
 import com.s10plus.core_application.GlobalSettings
 import com.s10plus.core_application.S10PlusApplication
+import com.s10plus.core_application.analytics.AnalyticsViewModel
 import com.s10plus.core_application.base_ui.BaseActivity
+import com.s10plus.core_application.base_ui.BaseViewModel
 import com.s10plus.core_application.commons.AbstractComponentAdapter
 import com.s10plus.core_application.commons.AbstractLayoutAdapter
 import com.s10plus.core_application.mocks.BecasAmad
@@ -25,12 +27,19 @@ import com.squareup.picasso.Picasso
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     var view:ViewS10Plus?=null
+
+    lateinit var analyticsViewModel:AnalyticsViewModel
     override fun setupView() {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
 
         setupHeader()
         setupBody()
         setupFooter()
+
+        AnalyticsViewModel.onSendAnalytics ={
+            analyticsViewModel.sendClicks(it.IdAction,it.Concept)
+
+        }
     }
 
     override fun setupHeader() {
@@ -87,6 +96,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     }
     override fun setupViewModel() {
+        analyticsViewModel = BaseViewModel.getViewModel(this,AnalyticsViewModel::class.java)
     }
 
     override fun setupObserver() {

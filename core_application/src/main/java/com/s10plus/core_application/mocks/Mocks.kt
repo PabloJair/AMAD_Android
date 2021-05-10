@@ -3,6 +3,7 @@ package com.s10plus.core_application.mocks
 import android.app.ActionBar
 import android.view.View
 import android.widget.LinearLayout
+import com.s10plus.core_application.GlobalSettings
 import com.s10plus.core_application.models.ViewS10Plus
 import com.s10plus.core_application.models.*
 import com.s10plus.core_application.ui.ButtonImageS10Plus
@@ -60,6 +61,13 @@ object Mocks {
                     Property(KeyProperties.COLOR_GRADIENT, "#206251 #246D5A"),
                     Property(KeyProperties.COLOR, "#FFFFFF"),
                     Property(KeyProperties.CORNER_RADIUS, "10"),
+                    Property(KeyProperties.SHOW_FOR_TIME, "9 18 !"),
+
+                    Property(KeyProperties.SEND_ANALYTICS, "60|phone|CLICK/CONTINUAR LLAMADA|${GlobalSettings.getCurrentPhone(false)}|CONTINUAR LA LLAMADA",),
+                    Property(
+                        KeyProperties.CALL,
+                        "5511620300"
+                    ),
 
 
                     )
@@ -112,8 +120,11 @@ object Mocks {
                     Property(KeyProperties.COLOR_GRADIENT, "#0c231e #071411"),
                     Property(KeyProperties.COLOR, "#FFFFFF"),
                     Property(KeyProperties.BACKGROUND, "#000000"),
-                    Property(KeyProperties.CORNER_RADIUS, "10")
-
+                    Property(KeyProperties.CORNER_RADIUS, "10"),
+                            Property(
+                            KeyProperties.OPEN_URL_INTERNAL,
+                    "https://cariai.com/cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdWQi9LWC9za2oyQllWbmlLOWhlQ0dneFlhSTFqTzNmb2lSY3liL2MveVVVT3JlMXVTTHpEQT09?phoneNumber="
+                ),
                 )
             )
             this.properties.addAll(properties)

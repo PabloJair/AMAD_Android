@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.AsyncTask
 import android.os.Build
 import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.net.toUri
@@ -49,6 +50,8 @@ class SplashActivity:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
         viewNumber = DialogPhoneBinding.inflate(LayoutInflater.from(this), null, false)
 
 
+       var json = Gson().toJson(GlobalSettings.config)
+        Log.d("",json)
     }
 
     override fun setupViewModel() {
@@ -69,8 +72,14 @@ class SplashActivity:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
                 is BaseFethData.Loader -> {
                 }
                 is BaseFethData.Success -> {
-                    if((it.data as String)=="OK"){
+                    if((it.data as String)=="finish"){
+
                         loadInformationUser5()
+                    }
+
+                    if((it.data as String)=="continue"){
+
+                        configurationViewModel.load()
                     }
 
                 }
@@ -173,25 +182,26 @@ class SplashActivity:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
 
     fun loadConfigurationStep4(){
 
+
             configurationViewModel.loadConfigurationCache()
 
     }
     @SuppressLint("MissingPermission")
     private fun executeLocationStep3(){
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-            AsyncTask.execute {
-                Thread.sleep(3000)
-                runOnUiThread {
-                    fusedLocationClient.lastLocation.addOnSuccessListener {
-                        GlobalSettings.lat = it?.latitude ?: 0.toDouble()
-                        GlobalSettings.lng = it?.longitude ?: 0.toDouble()
-                    }
-                }
+        fusedLocationClient.lastLocation.addOnSuccessListener {
+            GlobalSettings.lat = it?.latitude ?: 0.toDouble()
+            GlobalSettings.lng = it?.longitude ?: 0.toDouble()
+            loadConfigurationStep4()
 
-            }
+        }
+        fusedLocationClient.lastLocation.addOnFailureListener {
+            loadConfigurationStep4()
+
+        }
 
 
-        loadConfigurationStep4()
     }
 
     private fun validatePermissionAppStep2(){
@@ -211,6 +221,8 @@ class SplashActivity:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
 
         var permission = arrayListOf(
 
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.CALL_PHONE,
             Manifest.permission.READ_CALL_LOG,
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION
@@ -221,7 +233,6 @@ class SplashActivity:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
            permission.add(Manifest.permission.ANSWER_PHONE_CALLS)
         }else{
            permission.add(Manifest.permission.READ_PHONE_STATE)
-           permission.add(Manifest.permission.CALL_PHONE)
 
        }
 

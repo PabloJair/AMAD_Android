@@ -37,6 +37,7 @@ class ButtonNSBecas(context: Context, var attrs: AttributeSet?=null,
 
             binding.rs.visibility = if(binding.rs.visibility == GONE) VISIBLE else GONE
 
+            AbstractComponentModel.sendAnalytics("59|nav|CLICK/REDES_SOCIALES|Redes Sociales|Redes Sociales")
             if( FactoryUI.rootViewBody is ScrollView){
                (FactoryUI.rootViewBody as ScrollView).apply {
 
@@ -59,14 +60,14 @@ class ButtonNSBecas(context: Context, var attrs: AttributeSet?=null,
         binding.facebook.visibility = if(component.urlFacebook.isNullOrEmpty()) GONE else VISIBLE
 
         if(!component.openUrl.isNullOrEmpty()){
-            AbstractComponentModel.goToUrl(component.urlFacebook,binding.facebook)
-            AbstractComponentModel.goToUrl(component.urlTwitter,binding.twitter)
-            AbstractComponentModel.goToUrl(component.urlYoutube,binding.youtube)
+            AbstractComponentModel.goToUrl(component.urlFacebook,binding.facebook,  "64|nav|CLICK/REDES SOCIALES:|FACEBOOK|FACEBOOK")
+            AbstractComponentModel.goToUrl(component.urlTwitter,binding.twitter,    "63|nav|CLICK/REDES SOCIALES:|TWITTER|TWITTER"  )
+            AbstractComponentModel.goToUrl(component.urlYoutube,binding.youtube,    "65|nav|CLICK/REDES SOCIALES:|YOUTUBE|YOUTUBE"  )
 
         }else {
-            AbstractComponentModel.goToUrlInternal(component.urlFacebook,binding.facebook)
-            AbstractComponentModel.goToUrlInternal(component.urlTwitter,binding.twitter)
-            AbstractComponentModel.goToUrlInternal(component.urlYoutube,binding.youtube)
+            AbstractComponentModel.goToUrlInternal(component.urlFacebook,binding.facebook   ,"64|nav|CLICK/REDES SOCIALES:|FACEBOOK|FACEBOOK")
+            AbstractComponentModel.goToUrlInternal(component.urlTwitter,binding.twitter     ,"63|nav|CLICK/REDES SOCIALES:|TWITTER|TWITTER"  )
+            AbstractComponentModel.goToUrlInternal(component.urlYoutube,binding.youtube     ,"65|nav|CLICK/REDES SOCIALES:|YOUTUBE|YOUTUBE"  )
         }
 
     }

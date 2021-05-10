@@ -1,13 +1,13 @@
 package com.s10plus.core_application.models
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.LinearGradient
 import android.graphics.Shader
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RoundRectShape
+import android.net.Uri
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -16,14 +16,20 @@ import com.s10plus.core_application.GlobalSettings
 import com.s10plus.core_application.S10PlusApplication
 import com.s10plus.core_application.activities.ViewActivity
 import com.s10plus.core_application.activities.WebViewActivity
+import com.s10plus.core_application.analytics.AnalyticsViewModel.Companion.onSendAnalytics
 import com.s10plus.core_application.base_ui.ActivityUtils
 import com.s10plus.core_application.utils.JsonUtil
 import kotlinx.android.parcel.RawValue
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.system.exitProcess
 
 
 abstract class AbstractComponentModel(
     var properties: @RawValue ArrayList<Property> = arrayListOf()
 ) {
+
 
     @Expose(serialize = false)
     var typeComponent: TypeComponent = TypeComponent.NONE
@@ -76,6 +82,19 @@ abstract class AbstractComponentModel(
     @Expose(serialize = false)
     var openEmail: String?=null
         get()= Property.getPropertyValue(properties, KeyProperties.OPEN_EMAIL)
+
+    @Expose(serialize = false)
+    var sendAnalytics: String?=null
+        get()= Property.getPropertyValue(properties, KeyProperties.SEND_ANALYTICS)
+
+
+    @Expose(serialize = false)
+    var showForTime: String?=null
+        get()= Property.getPropertyValue(properties, KeyProperties.SHOW_FOR_TIME)
+
+    @Expose(serialize = false)
+    var call: String?=null
+        get()= Property.getPropertyValue(properties, KeyProperties.CALL)
     abstract fun onConfigView(view: View)
 
     open fun init(view: View) {
@@ -142,24 +161,68 @@ abstract class AbstractComponentModel(
         sendToView?.let {
             val viewS10Plus =  GlobalSettings.getView(it)
             if(viewS10Plus!=null){
-                goTo(viewS10Plus,view)
+                goTo(viewS10Plus,view,sendAnalytics)
             }
         }
 
-        backView?.let { backView(view) }
+        backView?.let { backView(view,sendAnalytics) }
 
 
-        openUrl?.let { goToUrl(it,view) }
+        openUrl?.let { goToUrl(it,view,sendAnalytics) }
 
-        openUrlInternal?.let { goToUrlInternal(it,view) }
-        openEmail?.let { goToEmail(it,view) }
+        openUrlInternal?.let { goToUrlInternal(it,view,sendAnalytics) }
+        openEmail?.let { goToEmail(it,view,sendAnalytics) }
+
+
+        showForTime?.let {
+
+
+            val split =it.split(" ")
+            val start = split[0].toInt()
+            val end = split[1].toInt()
+            val condition = split[2]
+
+            val hour: String = SimpleDateFormat("HH", Locale.US).format(Date())
+            when (condition){
+                "!"->{
+                    if(hour.toInt() !in start..end) {
+                        view.visibility = View.GONE
+
+                    }
+                }
+                ""->{
+                    if(hour.toInt() in start..end) {
+                        view.visibility = View.GONE
+
+                    }
+                }
+            }
+
+        }
+
+
+
+        call?.let {
+            continueCall(it,view,sendAnalytics)
+        }
+
 
 
     }
 
+
     companion object{
-         fun goTo(viewS10Plus: ViewS10Plus,view: View?)=
+
+        fun sendAnalytics(analytics: String?){
+            analytics?.let {
+                if(!it.isNullOrEmpty())
+                    onSendAnalytics?.invoke(AnalyticsModel.createForString(it))
+            }
+
+        }
+         fun goTo(viewS10Plus: ViewS10Plus,view: View?,analytics: String?)=
             view?.setOnClickListener {
+                if(!analytics.isNullOrEmpty())sendAnalytics(analytics)
                 S10PlusApplication.currentApplication.startActivity(
                     Intent(view!!.context, ViewActivity::class.java)
                         .putExtra(ViewActivity.VIEWS10PLUS, JsonUtil.toJson(viewS10Plus))
@@ -168,15 +231,20 @@ abstract class AbstractComponentModel(
             }
 
 
-         fun backView(view: View?) =
+         fun backView(view: View?,analytics: String?) =
             view?.setOnClickListener {
+                if(!analytics.isNullOrEmpty())sendAnalytics(analytics)
+
                 S10PlusApplication.getCurrentActivity().onBackPressed()
 
             }
 
 
-         fun goToUrlInternal(url: String,view: View?) =
+         fun goToUrlInternal(url: String,view: View?,analytics: String?) =
             view?.setOnClickListener {
+                if(!analytics.isNullOrEmpty())sendAnalytics(analytics)
+
+
                 S10PlusApplication.currentApplication.startActivity(
                     Intent(view.context, WebViewActivity::class.java)
                         .putExtra(WebViewActivity.URL, url)
@@ -184,18 +252,40 @@ abstract class AbstractComponentModel(
             }
 
 
-         fun goToUrl(url: String,view: View?) =
+         fun goToUrl(url: String,view: View?,analytics: String?) =
             view?.setOnClickListener {
+                if(!analytics.isNullOrEmpty())sendAnalytics(analytics)
+
                 ActivityUtils.openWebView(view!!.context,url)
 
             }
 
-        fun goToEmail(url: String,view: View?) =
+        fun goToEmail(url: String,view: View?,analytics: String?) =
             view?.setOnClickListener {
+                if(!analytics.isNullOrEmpty())sendAnalytics(analytics)
+
                 ActivityUtils.openEmail(view!!.context,url)
 
             }
+
+        fun continueCall(url: String,view: View?,analytics: String?) =
+            view?.setOnClickListener {
+                if(!analytics.isNullOrEmpty())sendAnalytics(analytics)
+
+
+                GlobalSettings.saveInterceptorPhone(false, GlobalSettings.getNumberPhone())
+                Thread.sleep(1000)
+
+                S10PlusApplication.currentApplication.startActivity(
+                    Intent(Intent.ACTION_DIAL).setData(
+                        Uri.parse("tel:" + GlobalSettings.getPhonesInterceptor().first())))
+                (S10PlusApplication.currentApplication as Activity).finishAffinity()
+                exitProcess(0)
+
+
+            }
     }
+
 
 
 

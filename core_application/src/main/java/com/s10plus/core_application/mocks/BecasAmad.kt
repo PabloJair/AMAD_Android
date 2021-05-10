@@ -27,34 +27,49 @@ object BecasAmad {
                                 Property(KeyProperties.SIZE, "-1 200"),
                             )
                         ),
-                        createText("El horario de Atención de nuestro  Call Center es de: 9:00 -18:00 hrs. Por favor intente alguna de las siguientes opciones de nuestro Menú Digital"),
+                        createText(
+                            "El horario de Atención de nuestro  Call Center es de: 9:00 -18:00 hrs. Por favor intente alguna de las siguientes opciones de nuestro Menú Digital",
+                        arrayListOf(
+                            Property(KeyProperties.SHOW_FOR_TIME, "19 8 ",)
+
+                        )),
 
                         createButtonImageBecas(
                             "Becas de Educación Basica",
                             "https://firebasestorage.googleapis.com/v0/b/amad-b1de7.appspot.com/o/6.png?alt=media&token=7c4baede-6d52-4c88-8461-741f436118da",
-                            arrayListOf(Property(KeyProperties.SEND_TO_VIEW, "1"))
+                            arrayListOf(Property(KeyProperties.SEND_TO_VIEW, "1",),
+                                Property(KeyProperties.SEND_ANALYTICS, "1|nav|CLICK/MENU|Becas de Educación Básica|Becas de Educación Básica",)
+                                )
                         ),
                         createButtonImageBecas(
                             "Becas de Educación Media Superior",
                             "https://firebasestorage.googleapis.com/v0/b/amad-b1de7.appspot.com/o/2.png?alt=media&token=27518f31-f679-4fc8-a6b2-58111793f886",
-                            arrayListOf(Property(KeyProperties.SEND_TO_VIEW, "2"))
+                            arrayListOf(Property(KeyProperties.SEND_TO_VIEW, "2"),
+                                Property(KeyProperties.SEND_ANALYTICS, "4|nav|CLICK/MENU|Becas de Educación Media Superior|Becas de Educación Media Superior",)
+                            )
                         ),
                         createButtonImageBecas(
                             "Becas Jovenes Escribiendo el futuro",
                             "https://firebasestorage.googleapis.com/v0/b/amad-b1de7.appspot.com/o/4.png?alt=media&token=d96cf614-383d-4da2-a898-17ad47f081c2",
-                            arrayListOf(Property(KeyProperties.SEND_TO_VIEW, "3"))
+                            arrayListOf(Property(KeyProperties.SEND_TO_VIEW, "3"),
+                                Property(KeyProperties.SEND_ANALYTICS, "9|nav|CLICK/MENU|Becas Jovenes Escribiendo el futuro|Becas Jovenes Escribiendo el futuro",)
+                            )
 
                         ),
                         createButtonImageBecas(
                             "Becas Elisa Acuña",
                             "https://firebasestorage.googleapis.com/v0/b/amad-b1de7.appspot.com/o/3.png?alt=media&token=99b55840-5e3d-45f1-8aaf-236f5bb1affa",
-                            arrayListOf(Property(KeyProperties.SEND_TO_VIEW, "4"))
+                            arrayListOf(Property(KeyProperties.SEND_TO_VIEW, "4"),
+                                Property(KeyProperties.SEND_ANALYTICS, "14|nav|CLICK/MENU|Becas Elisa Acuña|Becas Elisa Acuña",)
+                            )
 
                         ),
                         createButtonImageBecas(
                             "Contraloría Social",
                             "https://firebasestorage.googleapis.com/v0/b/amad-b1de7.appspot.com/o/5.png?alt=media&token=3dae3b31-f1ef-4ec9-81a3-8c54185caf04",
-                            arrayListOf(Property(KeyProperties.SEND_TO_VIEW, "5"))
+                            arrayListOf(Property(KeyProperties.SEND_TO_VIEW, "5"),
+                                Property(KeyProperties.SEND_ANALYTICS, "19|nav|CLICK/MENU|Contraloría Social|Contraloría Social",)
+                            )
 
 
                         ),
@@ -65,7 +80,9 @@ object BecasAmad {
                                 Property(
                                     KeyProperties.OPEN_URL,
                                     "https://www.google.com/maps/search/Coordinación nacional de becas cerca de mí"
-                                )
+                                ),
+                                Property(KeyProperties.SEND_ANALYTICS, "62|nav|CLICK/URL|Oficina Cerca de ti|Oficina Cerca de ti",)
+
                             )
                         ),
                         createButtonImageBecas(
@@ -75,7 +92,9 @@ object BecasAmad {
                                 Property(
                                     KeyProperties.OPEN_URL_INTERNAL,
                                     "https://cariai.com/cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdWQi9LWC9za2oyQllWbmlLOWhlQ0dneFlhSTFqTzNmb2lSY3liL2MveVVVT3JlMXVTTHpEQT09?phoneNumber="
-                                )
+                                ),
+                                Property(KeyProperties.SEND_ANALYTICS, "61|nav|CLICK/URL|Chat en Línea|Chat en Línea",)
+
                             )
 
 
@@ -101,7 +120,10 @@ object BecasAmad {
                             "https://firebasestorage.googleapis.com/v0/b/amad-b1de7.appspot.com/o/sep.jpg?alt=media&token=85e01f3e-a72e-4c09-9407-f2439c89c49a",
                             arrayListOf(
                                 Property(KeyProperties.SIZE, "-1 200"),
-                            )
+                                Property(KeyProperties.SEND_ANALYTICS, "66|nav|CLICK/BANNER|https://www.gob.mx/sep|SEP",)
+
+                            ),
+
 
                         ),
                         createText("POWERED by S10Plus"),
@@ -145,7 +167,10 @@ object BecasAmad {
                                 Property(
                                     KeyProperties.OPEN_URL,
                                     "https://www.gob.mx/becasbenitojuarez/articulos/beca-bienestar-para-las-familias-de-educacion-basica"
-                                )
+                                ),
+                                Property(KeyProperties.SEND_ANALYTICS, "2|nav|CLICK/URL|https://www.gob.mx/becasbenitojuarez/articulos/beca-bienestar-para-las-familias-de-educacion-basica|Preguntas frecuentes Educacion Básica",)
+
+
 
 
                             )
@@ -179,13 +204,17 @@ object BecasAmad {
                         createButton(
                             arrayListOf(
                                 Property(KeyProperties.TEXT, "Información General"),
-                                Property(KeyProperties.SEND_TO_VIEW, "7")
+                                Property(KeyProperties.SEND_TO_VIEW, "7"),
+                                Property(KeyProperties.SEND_ANALYTICS, "6|nav|CLICK/SUB_MENU|Información General|Información General",)
+
                             )
                         ),
                         createButton(
                             arrayListOf(
                                 Property(KeyProperties.TEXT, "Bienestar Azteca"),
-                                Property(KeyProperties.SEND_TO_VIEW, "6")
+                                Property(KeyProperties.SEND_TO_VIEW, "6"),
+                                Property(KeyProperties.SEND_ANALYTICS, "5|nav|CLICK/SUB_MENU|Bienestar Azteca|Bienestar Azteca",)
+
                             )
                         ),
 
@@ -222,7 +251,9 @@ object BecasAmad {
                                 Property(
                                     KeyProperties.OPEN_URL,
                                     "https://www.gob.mx/becasbenitojuarez/articulos/beca-bienestar-para-las-familias-de-educacion-basica"
-                                )
+                                ),
+                                Property(KeyProperties.SEND_ANALYTICS, "7|nav|CLICK/URL|https://www.gob.mx/becasbenitojuarez/articulos/beca-bienestar-para-las-familias-de-educacion-basica|Preguntas frecuentes Educacion Media",)
+
 
 
                             )

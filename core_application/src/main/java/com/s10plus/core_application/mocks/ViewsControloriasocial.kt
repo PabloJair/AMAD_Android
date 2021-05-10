@@ -25,7 +25,9 @@ object ViewsControloriasocial {
                         Mocks.createButton(
                             arrayListOf(
                                 Property(KeyProperties.TEXT, "Información General"),
-                                Property(KeyProperties.SEND_TO_VIEW, "20")
+                                Property(KeyProperties.SEND_TO_VIEW, "20"),
+                                Property(KeyProperties.SEND_ANALYTICS, "25|nav|CLICK/SUB_MENU|Información General|Información General_CS",)
+
 
 
                             )
@@ -36,7 +38,9 @@ object ViewsControloriasocial {
                                     KeyProperties.TEXT,
                                     "¡Regístrate como representante!"
                                 ),
-                                Property(KeyProperties.SEND_TO_VIEW, "21")
+                                Property(KeyProperties.SEND_TO_VIEW, "21"),
+                                Property(KeyProperties.SEND_ANALYTICS, "23|nav|CLICK/SUB_MENU|¡Regístrate como representante!|¡Regístrate como representante!",)
+
 
                             )
                         ),
@@ -46,7 +50,9 @@ object ViewsControloriasocial {
                                 Property(
                                     KeyProperties.OPEN_URL,
                                     "https://sidec.funcionpublica.gob.mx/#!/"
-                                )
+                                ),
+                                Property(KeyProperties.SEND_ANALYTICS, "22|nav|CLICK/SUB_MENU|https://sidec.funcionpublica.gob.mx/#!/|Denuncia Ciudadana",)
+
                             )
                         ),
                         Mocks.createButton(
@@ -55,13 +61,17 @@ object ViewsControloriasocial {
                                 Property(
                                     KeyProperties.OPEN_URL,
                                     "https://alertadores.funcionpublica.gob.mx/"
-                                )
+                                ),
+                                Property(KeyProperties.SEND_ANALYTICS, "21|nav|CLICK/SUB_MENU|https://alertadores.funcionpublica.gob.mx/|Ciudadanos Alertadores",)
+
                             )
                         ),
                         Mocks.createButton(
                             arrayListOf(
                                 Property(KeyProperties.TEXT, "Quejas y Denuncias"),
-                                Property(KeyProperties.SEND_TO_VIEW, "22")
+                                Property(KeyProperties.SEND_TO_VIEW, "22"),
+                                Property(KeyProperties.SEND_ANALYTICS, "20|nav|CLICK/SUB_MENU|Quejas y Denuncias|Quejas y Denuncias",)
+
 
                             )
                         ),

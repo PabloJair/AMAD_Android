@@ -40,20 +40,26 @@ object BecasAmadMenuBienestarAzteca {
                         Mocks.createButton(
                             arrayListOf(
                                 Property(KeyProperties.TEXT, "¿Qué es Bienestar Azteca?"),
-                                Property(KeyProperties.SEND_TO_VIEW, "8")
+                                Property(KeyProperties.SEND_TO_VIEW, "8"),
+                                Property(KeyProperties.SEND_ANALYTICS, "44|nav|CLICK/DETALLE|¿Qué es Bienestar Azteca?|¿Qué es Bienestar Azteca?",)
+
 
                             )
                         ),
                         Mocks.createButton(
                             arrayListOf(
                                 Property(KeyProperties.TEXT, "Etapa 1. Registro"),
-                                Property(KeyProperties.SEND_TO_VIEW, "9")
+                                Property(KeyProperties.SEND_TO_VIEW, "9"),
+                                Property(KeyProperties.SEND_ANALYTICS, "43|nav|CLICK/DETALLE|Etapa 1. Registro|Etapa 1. Registro",)
+
                             )
                         ),
                         Mocks.createButton(
                             arrayListOf(
                                 Property(KeyProperties.TEXT, "Etapa 2. Recibe tu beca"),
-                                Property(KeyProperties.SEND_TO_VIEW, "10")
+                                Property(KeyProperties.SEND_TO_VIEW, "10"),
+                                Property(KeyProperties.SEND_ANALYTICS, "42|nav|CLICK/DETALLE|Etapa 2. Recibe tu beca.|Etapa 2. Recibe tu beca.",)
+
                             )
                         ),
                         Mocks.createButton(
@@ -62,7 +68,9 @@ object BecasAmadMenuBienestarAzteca {
                                     KeyProperties.TEXT,
                                     "¡Ayuda! No me puedo registrar"
                                 ),
-                                Property(KeyProperties.SEND_TO_VIEW, "11")
+                                Property(KeyProperties.SEND_TO_VIEW, "11"),
+                                Property(KeyProperties.SEND_ANALYTICS, "41|nav|CLICK/DETALLE|¡Ayuda! No me puedo registrar.|¡Ayuda! No me puedo registrar.",)
+
 
                             )
                         ),
@@ -72,14 +80,18 @@ object BecasAmadMenuBienestarAzteca {
                                     KeyProperties.TEXT,
                                     "No me llega el código de verificación ni al correo ni al teléfono"
                                 ),
-                                Property(KeyProperties.SEND_TO_VIEW, "12")
+                                Property(KeyProperties.SEND_TO_VIEW, "12"),
+                                Property(KeyProperties.SEND_ANALYTICS, "40|nav|CLICK/DETALLE|No me llega el código de verificación ni al correo ni al teléfono|No me llega el código de verificación ni al correo ni al teléfono",)
+
 
                             )
                         ),
                         Mocks.createButton(
                             arrayListOf(
                                 Property(KeyProperties.TEXT, "Olvidé mi contraseña"),
-                                Property(KeyProperties.SEND_TO_VIEW, "13")
+                                Property(KeyProperties.SEND_TO_VIEW, "13"),
+                                Property(KeyProperties.SEND_ANALYTICS, "39|nav|CLICK/DETALLE|Olvidé mi contraseña|Olvidé mi contraseña",)
+
                             )
                         ),
                         Mocks.createButton(
@@ -88,7 +100,9 @@ object BecasAmadMenuBienestarAzteca {
                                     KeyProperties.TEXT,
                                     "Mi colonia y/o mi código postal no\n" + "aparece en el listado desplegable"
                                 ),
-                                Property(KeyProperties.SEND_TO_VIEW, "14")
+                                Property(KeyProperties.SEND_TO_VIEW, "14"),
+                                Property(KeyProperties.SEND_ANALYTICS, "38|nav|CLICK/DETALLE|Mi colonia y/o mi código postal no aparece en el listado desplegable|Mi colonia y/o mi código postal no aparece en el listado desplegable",)
+
 
                             )
                         ),
@@ -98,7 +112,9 @@ object BecasAmadMenuBienestarAzteca {
                                     KeyProperties.TEXT,
                                     "Durante el registro el sistema no me " + "pidió tomarme la fotografía"
                                 ),
-                                Property(KeyProperties.SEND_TO_VIEW, "15")
+                                Property(KeyProperties.SEND_TO_VIEW, "15"),
+                                Property(KeyProperties.SEND_ANALYTICS, "37|nav|CLICK/DETALLE|Durante el registro el sistema no me pidió tomarme la fotografía|Durante el registro el sistema no me pidió tomarme la fotografía",)
+
 
                             )
                         ),
@@ -108,7 +124,9 @@ object BecasAmadMenuBienestarAzteca {
                                     KeyProperties.TEXT,
                                     "¿Cuál es la vigencia del código QR y del código de barras?"
                                 ),
-                                Property(KeyProperties.SEND_TO_VIEW, "16")
+                                Property(KeyProperties.SEND_TO_VIEW, "16"),
+                                Property(KeyProperties.SEND_ANALYTICS, "36|nav|CLICK/DETALLE|¿Cuál es la vigencia del código QR y delcódigo de barras?|¿Cuál es la vigencia del código QR y del código de barras?",)
+
                             )
                         ),
 
@@ -148,8 +166,10 @@ object BecasAmadMenuBienestarAzteca {
                                     KeyProperties.OPEN_URL,
                                     "https://bienestarazteca.com/"
                                 ),
+                                Property(KeyProperties.SEND_ANALYTICS, "58|nav|CLICK/URL|https://bienestarazteca.com/|¿Qué es Bienestar Azteca?",)
 
-                                )
+
+                            )
                         ),
 
 
@@ -188,8 +208,12 @@ object BecasAmadMenuBienestarAzteca {
                                     KeyProperties.OPEN_URL,
                                     "https://bienestarazteca.com/"
                                 ),
+                                Property(KeyProperties.SEND_ANALYTICS, "55|nav|CLICK/URL|https://bienestarazteca.com/|Etapa 1. Registro",)
 
-                                )
+
+
+
+                            )
                         ),
 
 
@@ -256,8 +280,10 @@ object BecasAmadMenuBienestarAzteca {
                                     KeyProperties.OPEN_URL,
                                     "https://bienestarazteca.com/"
                                 ),
+                                Property(KeyProperties.SEND_ANALYTICS, "52|nav|CLICK/URL|https://bienestarazteca.com/|Etapa 1. Registro",)
 
-                                )
+
+                            )
                         ),
                         Mocks.createText(
                             "2. Elige la opción “Recibir apoyo” y selecciona si deseas cobrar tu beca en una sucursal de Banco Azteca o en un establecimiento autorizado. ",
@@ -415,6 +441,7 @@ object BecasAmadMenuBienestarAzteca {
                                     KeyProperties.OPEN_URL,
                                     "https://bienestarazteca.com/"
                                 ),
+                                Property(KeyProperties.SEND_ANALYTICS, "49|nav|CLICK/URL|https://bienestarazteca.com/|Etapa 1. Registro",)
 
                                 )
                         ),

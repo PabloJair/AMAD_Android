@@ -24,12 +24,16 @@ object ViewsBJEF {
                         Mocks.createTitle("Becas Jovenes Escribiendo el futuro"),
                         Mocks.createButton(
                             arrayListOf(Property(KeyProperties.TEXT, "Información General"),
-                                Property(KeyProperties.SEND_TO_VIEW, "17")
+                                Property(KeyProperties.SEND_TO_VIEW, "17"),
+                                Property(KeyProperties.SEND_ANALYTICS, "11|nav|CLICK/SUB_MENU|Información General|Información General_JEF",)
+
                             )
                         ),
                         Mocks.createButton(
                             arrayListOf(Property(KeyProperties.TEXT, "Convocatoría"),
-                                Property(KeyProperties.SEND_TO_VIEW, "18")
+                                Property(KeyProperties.SEND_TO_VIEW, "18"),
+                                Property(KeyProperties.SEND_ANALYTICS, "10|nav|CLICK/SUB_MENU|Convocatoría|Convocatoria_JEF",)
+
                             )
                         ),
 
