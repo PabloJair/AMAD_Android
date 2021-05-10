@@ -1,34 +1,23 @@
 package com.s10plus.amad
 
-import android.content.Intent
 import android.os.AsyncTask
-import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.s10plus.amad.databinding.ActivityMainBinding
 import com.s10plus.core_application.GlobalSettings
-import com.s10plus.core_application.S10PlusApplication
 import com.s10plus.core_application.analytics.AnalyticsViewModel
 import com.s10plus.core_application.base_ui.BaseActivity
 import com.s10plus.core_application.base_ui.BaseViewModel
-import com.s10plus.core_application.commons.AbstractComponentAdapter
-import com.s10plus.core_application.commons.AbstractLayoutAdapter
-import com.s10plus.core_application.mocks.BecasAmad
-import com.s10plus.core_application.mocks.Mocks
-import com.s10plus.core_application.models.AbstractComponentModel
-import com.s10plus.core_application.models.AbstractLayoutModel
 import com.s10plus.core_application.models.ViewS10Plus
 import com.s10plus.core_application.ui.FactoryUI
 import com.squareup.picasso.Picasso
 
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
-    var view:ViewS10Plus?=null
+    var view: ViewS10Plus? = null
 
-    lateinit var analyticsViewModel:AnalyticsViewModel
+    lateinit var analyticsViewModel: AnalyticsViewModel
     override fun setupView() {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
 
@@ -36,8 +25,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         setupBody()
         setupFooter()
 
-        AnalyticsViewModel.onSendAnalytics ={
-            analyticsViewModel.sendClicks(it.IdAction,it.Concept)
+        AnalyticsViewModel.onSendAnalytics = {
+            analyticsViewModel.sendClicks(it.IdAction, it.Concept)
 
         }
     }
@@ -53,25 +42,22 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun setupBody() {
 
 
-        GlobalSettings.config.views.find { viewS10Plus -> viewS10Plus.id =="0" }?.body?.
-        layout?.let {
-            FactoryUI.createBody(this,it,binding.body)
+        GlobalSettings.config.views.find { viewS10Plus -> viewS10Plus.id == "0" }?.body?.layout?.let {
+            FactoryUI.createBody(this, it, binding.body)
         }
 
 
-       /* view?.body?.layout?.let {
-            FactoryUI.createLayout(this,it,binding.body)
-        }*/
+        /* view?.body?.layout?.let {
+             FactoryUI.createLayout(this,it,binding.body)
+         }*/
 
     }
 
 
-
     override fun setupFooter() {
 
-        GlobalSettings.config.views.find { viewS10Plus -> viewS10Plus.id =="0" }?.footer?.
-        layout?.let {
-            FactoryUI.createFooter(this,it,binding.rootFooter)
+        GlobalSettings.config.views.find { viewS10Plus -> viewS10Plus.id == "0" }?.footer?.layout?.let {
+            FactoryUI.createFooter(this, it, binding.rootFooter)
         }
 
 
@@ -79,13 +65,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         AsyncTask.execute {
             Thread.sleep(3000)
             this.runOnUiThread {
-                binding.body.smoothScrollTo(0,binding.body.bottom)
+                binding.body.smoothScrollTo(0, binding.body.bottom)
 
             }
 
         }
 
     }
+
     override fun onResume() {
         super.onResume()
 
@@ -95,8 +82,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         // FactoryUI.rootViewHeader = binding.
 
     }
+
     override fun setupViewModel() {
-        analyticsViewModel = BaseViewModel.getViewModel(this,AnalyticsViewModel::class.java)
+        analyticsViewModel = BaseViewModel.getViewModel(this, AnalyticsViewModel::class.java)
     }
 
     override fun setupObserver() {
@@ -109,20 +97,19 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         val db = Firebase.firestore
 
 
-
-
         /*db.collection("/test").document("EekyX3rNZzkicutjVIyG")
             .set(Mocks.createView())*/
 
-      /* db.collection("/test").document("EekyX3rNZzkicutjVIyG")
-            .get().addOnSuccessListener {
+        /* db.collection("/test").document("EekyX3rNZzkicutjVIyG")
+              .get().addOnSuccessListener {
 
-                view  = gson.fromJson(gson.toJson(it.data),ViewS10Plus::class.java)
-                reloadData()
-            }*/
+                  view  = gson.fromJson(gson.toJson(it.data),ViewS10Plus::class.java)
+                  reloadData()
+              }*/
 
     }
-    private fun reloadData(){
+
+    private fun reloadData() {
         binding.body.removeAllViews()
         binding.header.removeAllViews()
         binding.rootFooter.removeAllViews()
@@ -130,8 +117,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
 
     }
-    companion object{
 
-    }
+    companion object
 
 }

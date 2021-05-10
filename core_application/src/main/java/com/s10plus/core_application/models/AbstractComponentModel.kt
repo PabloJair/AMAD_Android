@@ -22,7 +22,6 @@ import com.s10plus.core_application.utils.JsonUtil
 import kotlinx.android.parcel.RawValue
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.system.exitProcess
 
 
@@ -33,68 +32,78 @@ abstract class AbstractComponentModel(
 
     @Expose(serialize = false)
     var typeComponent: TypeComponent = TypeComponent.NONE
+
     @Expose(serialize = false)
     var text: String = ""
         get() = Property.getPropertyValue(properties, KeyProperties.TEXT) ?: ""
+
     @Expose(serialize = false)
     var textColor = ""
         get() = Property.getPropertyValue(properties, KeyProperties.COLOR) ?: "#000000"
+
     @Expose(serialize = false)
     var padding: List<Int>? = null
         get() = Property.getProperty(properties, KeyProperties.PADDING)?.valueToIntArray(" ")
+
     @Expose(serialize = false)
     var size: List<Int>? = null
         get() = Property.getProperty(properties, KeyProperties.SIZE)?.valueToIntArray(" ")
+
     @Expose(serialize = false)
     var margin: List<Int>? = null
         get() = Property.getProperty(properties, KeyProperties.MARGIN)?.valueToIntArray(" ")
+
     @Expose(serialize = false)
     var cornerRadius: String? = null
         get() = Property.getProperty(properties, KeyProperties.CORNER_RADIUS)?.value
+
     @Expose(serialize = false)
     var background: String? = null
         get() = Property.getPropertyValue(properties, KeyProperties.BACKGROUND)
+
     @Expose(serialize = false)
     var gradientBackground: List<Int>? = null
         get() = Property.getProperty(properties, KeyProperties.COLOR_GRADIENT)
             ?.split(" ")?.map { Color.parseColor(it) }
+
     @Expose(serialize = false)
     private var view: View? = null
 
     @Expose(serialize = false)
-    var sendToView: String?=null
-        get()= Property.getPropertyValue(properties, KeyProperties.SEND_TO_VIEW)
+    var sendToView: String? = null
+        get() = Property.getPropertyValue(properties, KeyProperties.SEND_TO_VIEW)
 
 
     @Expose(serialize = false)
-    var backView: String?=null
-        get()= Property.getPropertyValue(properties, KeyProperties.BACK_VIEW)
+    var backView: String? = null
+        get() = Property.getPropertyValue(properties, KeyProperties.BACK_VIEW)
 
 
     @Expose(serialize = false)
-    var openUrl: String?=null
-        get()= Property.getPropertyValue(properties, KeyProperties.OPEN_URL)
+    var openUrl: String? = null
+        get() = Property.getPropertyValue(properties, KeyProperties.OPEN_URL)
 
     @Expose(serialize = false)
-    var openUrlInternal: String?=null
-        get()= Property.getPropertyValue(properties, KeyProperties.OPEN_URL_INTERNAL)
+    var openUrlInternal: String? = null
+        get() = Property.getPropertyValue(properties, KeyProperties.OPEN_URL_INTERNAL)
 
     @Expose(serialize = false)
-    var openEmail: String?=null
-        get()= Property.getPropertyValue(properties, KeyProperties.OPEN_EMAIL)
+    var openEmail: String? = null
+        get() = Property.getPropertyValue(properties, KeyProperties.OPEN_EMAIL)
 
     @Expose(serialize = false)
-    var sendAnalytics: String?=null
-        get()= Property.getPropertyValue(properties, KeyProperties.SEND_ANALYTICS)
+    var sendAnalytics: String? = null
+        get() = Property.getPropertyValue(properties, KeyProperties.SEND_ANALYTICS)
 
 
     @Expose(serialize = false)
-    var showForTime: String?=null
-        get()= Property.getPropertyValue(properties, KeyProperties.SHOW_FOR_TIME)
+    var showForTime: String? = null
+        get() = Property.getPropertyValue(properties, KeyProperties.SHOW_FOR_TIME)
 
     @Expose(serialize = false)
-    var call: String?=null
-        get()= Property.getPropertyValue(properties, KeyProperties.CALL)
+    var call: String? = null
+        get() = Property.getPropertyValue(properties, KeyProperties.CALL)
+
     abstract fun onConfigView(view: View)
 
     open fun init(view: View) {
@@ -113,15 +122,20 @@ abstract class AbstractComponentModel(
 
         val shape = ShapeDrawable()
         size?.let {
-            if(view.layoutParams is LinearLayout.LayoutParams){
+            if (view.layoutParams is LinearLayout.LayoutParams) {
                 view.layoutParams = LinearLayout.LayoutParams(it[0], it[1])
-            }else{
+            } else {
                 view.layoutParams = ViewGroup.MarginLayoutParams(it[0], it[1])
 
             }
         }
         margin?.let {
-            (view.layoutParams as ViewGroup.MarginLayoutParams).setMargins(it[0], it[1], it[2], it[3])
+            (view.layoutParams as ViewGroup.MarginLayoutParams).setMargins(
+                it[0],
+                it[1],
+                it[2],
+                it[3]
+            )
         }
         padding?.let { view.setPadding(it[0], it[1], it[2], it[3]) }
 
@@ -130,7 +144,8 @@ abstract class AbstractComponentModel(
             val radius = it.toFloat()
             shape.shape = RoundRectShape(
                 floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius),
-                null, null)
+                null, null
+            )
             view.background = shape
         }
         background?.let {
@@ -159,39 +174,39 @@ abstract class AbstractComponentModel(
 
 
         sendToView?.let {
-            val viewS10Plus =  GlobalSettings.getView(it)
-            if(viewS10Plus!=null){
-                goTo(viewS10Plus,view,sendAnalytics)
+            val viewS10Plus = GlobalSettings.getView(it)
+            if (viewS10Plus != null) {
+                goTo(viewS10Plus, view, sendAnalytics)
             }
         }
 
-        backView?.let { backView(view,sendAnalytics) }
+        backView?.let { backView(view, sendAnalytics) }
 
 
-        openUrl?.let { goToUrl(it,view,sendAnalytics) }
+        openUrl?.let { goToUrl(it, view, sendAnalytics) }
 
-        openUrlInternal?.let { goToUrlInternal(it,view,sendAnalytics) }
-        openEmail?.let { goToEmail(it,view,sendAnalytics) }
+        openUrlInternal?.let { goToUrlInternal(it, view, sendAnalytics) }
+        openEmail?.let { goToEmail(it, view, sendAnalytics) }
 
 
         showForTime?.let {
 
 
-            val split =it.split(" ")
+            val split = it.split(" ")
             val start = split[0].toInt()
             val end = split[1].toInt()
             val condition = split[2]
 
             val hour: String = SimpleDateFormat("HH", Locale.US).format(Date())
-            when (condition){
-                "!"->{
-                    if(hour.toInt() !in start..end) {
+            when (condition) {
+                "!" -> {
+                    if (hour.toInt() !in start..end) {
                         view.visibility = View.GONE
 
                     }
                 }
-                ""->{
-                    if(hour.toInt() in start..end) {
+                "" -> {
+                    if (hour.toInt() in start..end) {
                         view.visibility = View.GONE
 
                     }
@@ -203,46 +218,46 @@ abstract class AbstractComponentModel(
 
 
         call?.let {
-            continueCall(it,view,sendAnalytics)
+            continueCall(it, view, sendAnalytics)
         }
-
 
 
     }
 
 
-    companion object{
+    companion object {
 
-        fun sendAnalytics(analytics: String?){
+        fun sendAnalytics(analytics: String?) {
             analytics?.let {
-                if(!it.isNullOrEmpty())
+                if (!it.isNullOrEmpty())
                     onSendAnalytics?.invoke(AnalyticsModel.createForString(it))
             }
 
         }
-         fun goTo(viewS10Plus: ViewS10Plus,view: View?,analytics: String?)=
+
+        fun goTo(viewS10Plus: ViewS10Plus, view: View?, analytics: String?) =
             view?.setOnClickListener {
-                if(!analytics.isNullOrEmpty())sendAnalytics(analytics)
+                if (!analytics.isNullOrEmpty()) sendAnalytics(analytics)
                 S10PlusApplication.currentApplication.startActivity(
-                    Intent(view!!.context, ViewActivity::class.java)
+                    Intent(view.context, ViewActivity::class.java)
                         .putExtra(ViewActivity.VIEWS10PLUS, JsonUtil.toJson(viewS10Plus))
                 )
 
             }
 
 
-         fun backView(view: View?,analytics: String?) =
+        fun backView(view: View?, analytics: String?) =
             view?.setOnClickListener {
-                if(!analytics.isNullOrEmpty())sendAnalytics(analytics)
+                if (!analytics.isNullOrEmpty()) sendAnalytics(analytics)
 
                 S10PlusApplication.getCurrentActivity().onBackPressed()
 
             }
 
 
-         fun goToUrlInternal(url: String,view: View?,analytics: String?) =
+        fun goToUrlInternal(url: String, view: View?, analytics: String?) =
             view?.setOnClickListener {
-                if(!analytics.isNullOrEmpty())sendAnalytics(analytics)
+                if (!analytics.isNullOrEmpty()) sendAnalytics(analytics)
 
 
                 S10PlusApplication.currentApplication.startActivity(
@@ -252,25 +267,25 @@ abstract class AbstractComponentModel(
             }
 
 
-         fun goToUrl(url: String,view: View?,analytics: String?) =
+        fun goToUrl(url: String, view: View?, analytics: String?) =
             view?.setOnClickListener {
-                if(!analytics.isNullOrEmpty())sendAnalytics(analytics)
+                if (!analytics.isNullOrEmpty()) sendAnalytics(analytics)
 
-                ActivityUtils.openWebView(view!!.context,url)
+                ActivityUtils.openWebView(view.context, url)
 
             }
 
-        fun goToEmail(url: String,view: View?,analytics: String?) =
+        fun goToEmail(url: String, view: View?, analytics: String?) =
             view?.setOnClickListener {
-                if(!analytics.isNullOrEmpty())sendAnalytics(analytics)
+                if (!analytics.isNullOrEmpty()) sendAnalytics(analytics)
 
-                ActivityUtils.openEmail(view!!.context,url)
+                ActivityUtils.openEmail(view.context, url)
 
             }
 
-        fun continueCall(url: String,view: View?,analytics: String?) =
+        fun continueCall(url: String, view: View?, analytics: String?) =
             view?.setOnClickListener {
-                if(!analytics.isNullOrEmpty())sendAnalytics(analytics)
+                if (!analytics.isNullOrEmpty()) sendAnalytics(analytics)
 
 
                 GlobalSettings.saveInterceptorPhone(false, GlobalSettings.getNumberPhone())
@@ -278,17 +293,15 @@ abstract class AbstractComponentModel(
 
                 S10PlusApplication.currentApplication.startActivity(
                     Intent(Intent.ACTION_DIAL).setData(
-                        Uri.parse("tel:" + GlobalSettings.getPhonesInterceptor().first())))
+                        Uri.parse("tel:" + GlobalSettings.getPhonesInterceptor().first())
+                    )
+                )
                 (S10PlusApplication.currentApplication as Activity).finishAffinity()
                 exitProcess(0)
 
 
             }
     }
-
-
-
-
 
 
 }

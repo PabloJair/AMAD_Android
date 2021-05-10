@@ -13,7 +13,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.net.toUri
-import com.blankj.utilcode.util.JsonUtils
 import com.blankj.utilcode.util.KeyboardUtils
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -34,15 +33,15 @@ import com.s10plus.core_application.ui.dialog.TypeDialog
 import com.tbruyelle.rxpermissions3.RxPermissions
 
 
-class SplashActivity:BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
+class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
 
     //1.- Validar Json de carga, Si no funciona el servicio carga el Json de cache
     //2.- Primera configuracion, validar si esta activo el sonido, si esta activo descargar el mp3 y guardarlo en el dispositvo
     lateinit var configurationViewModel: ConfigurationViewModel
-    lateinit var viewNumber: DialogPhoneBinding;
+    lateinit var viewNumber: DialogPhoneBinding
     var rxPermissions = RxPermissions(this)
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    var countPermission=2
+    var countPermission = 2
     var showMessage = true
 
 
@@ -50,8 +49,8 @@ class SplashActivity:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
         viewNumber = DialogPhoneBinding.inflate(LayoutInflater.from(this), null, false)
 
 
-       var json = Gson().toJson(GlobalSettings.config)
-        Log.d("",json)
+        var json = Gson().toJson(GlobalSettings.config)
+        Log.d("", json)
     }
 
     override fun setupViewModel() {
@@ -72,12 +71,12 @@ class SplashActivity:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
                 is BaseFethData.Loader -> {
                 }
                 is BaseFethData.Success -> {
-                    if((it.data as String)=="finish"){
+                    if ((it.data as String) == "finish") {
 
                         loadInformationUser5()
                     }
 
-                    if((it.data as String)=="continue"){
+                    if ((it.data as String) == "continue") {
 
                         configurationViewModel.load()
                     }
@@ -98,13 +97,13 @@ class SplashActivity:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
         }
     }
 
-    private fun getNumber(){
-        if(GlobalSettings.getCurrentPhone(true).isNullOrEmpty()
-            && GlobalSettings.config.preconfiguration.requestPhone.active){
+    private fun getNumber() {
+        if (GlobalSettings.getCurrentPhone(true).isNullOrEmpty()
+            && GlobalSettings.config.preconfiguration.requestPhone.active
+        ) {
 
             val alert = AlertDialog.Builder(this)
-                .setView(viewNumber.root).
-                show().apply { setCancelable(false) }
+                .setView(viewNumber.root).show().apply { setCancelable(false) }
             viewNumber.cancel.setOnClickListener {
                 GlobalSettings.setCurrentPhone("0000000000")
                 getState()
@@ -117,41 +116,45 @@ class SplashActivity:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
                 (viewNumber.root.parent as ViewGroup).removeView(viewNumber.root)
 
                 val snack =
-                    CustomSnackbar.make(binding.root,"¿Es correcto tu número telefonico?",
-                        viewNumber.editText.text!!.toString(),"Si","No",
-                    Snackbar.LENGTH_INDEFINITE)
-                    .setClickOne {
-                        var number =  if(viewNumber.editText.text!!.toString()=="") "0000000000"
-                        else viewNumber.editText.text!!.toString()
-                        GlobalSettings.setCurrentPhone(number)
-                        getState()
-                    }.setClickTwo {
+                    CustomSnackbar.make(
+                        binding.root, "¿Es correcto tu número telefonico?",
+                        viewNumber.editText.text!!.toString(), "Si", "No",
+                        Snackbar.LENGTH_INDEFINITE
+                    )
+                        .setClickOne {
+                            var number =
+                                if (viewNumber.editText.text!!.toString() == "") "0000000000"
+                                else viewNumber.editText.text!!.toString()
+                            GlobalSettings.setCurrentPhone(number)
+                            getState()
+                        }.setClickTwo {
 
-                        it.dismiss()
+                            it.dismiss()
 
-                    }
+                        }
                 snack.show()
 
             }
-        }else {
+        } else {
             getState()
         }
 
     }
 
-    private fun getState (){
-        if(GlobalSettings.getState()==null && GlobalSettings.config.preconfiguration.state.active){
-            DialogChooseState.dialogState(this,{ GlobalSettings.setState(it)
+    private fun getState() {
+        if (GlobalSettings.getState() == null && GlobalSettings.config.preconfiguration.state.active) {
+            DialogChooseState.dialogState(this, {
+                GlobalSettings.setState(it)
                 goToHomeStep6()
-            },{})
-        }else
+            }, {})
+        } else
             goToHomeStep6()
 
 
     }
 
 
-    private fun configGeneralStep1(){
+    private fun configGeneralStep1() {
         startService(Intent(this, CallReceiverService::class.java))
         rxPermissions.setLogging(true)
         GlobalSettings.saveInterceptorPhone(false)
@@ -159,15 +162,18 @@ class SplashActivity:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
 
     }
 
-    fun loadInformationUser5(){
+    fun loadInformationUser5() {
         getNumber()
     }
-    fun goToHomeStep6(){
+
+    fun goToHomeStep6() {
         AsyncTask.execute {
             Thread.sleep(100)
             runOnUiThread {
-                val mp = MediaPlayer.create(this,
-                    S10PlusApplication.currentApplication.getFileStreamPath("sound.mp3").toUri())
+                val mp = MediaPlayer.create(
+                    this,
+                    S10PlusApplication.currentApplication.getFileStreamPath("sound.mp3").toUri()
+                )
                 mp.start()
                 mp.setOnCompletionListener {}
             }
@@ -175,21 +181,23 @@ class SplashActivity:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
         }
 
         S10PlusApplication.currentApplication.startActivity(
-            Intent(this, MainActivity::class.java))
+            Intent(this, MainActivity::class.java)
+        )
 
         this.finish()
     }
 
-    fun loadConfigurationStep4(){
+    fun loadConfigurationStep4() {
 
 
-            configurationViewModel.loadConfigurationCache()
+        configurationViewModel.loadConfigurationCache()
 
     }
-    @SuppressLint("MissingPermission")
-    private fun executeLocationStep3(){
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+    @SuppressLint("MissingPermission")
+    private fun executeLocationStep3() {
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         fusedLocationClient.lastLocation.addOnSuccessListener {
             GlobalSettings.lat = it?.latitude ?: 0.toDouble()
             GlobalSettings.lng = it?.longitude ?: 0.toDouble()
@@ -204,7 +212,7 @@ class SplashActivity:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
 
     }
 
-    private fun validatePermissionAppStep2(){
+    private fun validatePermissionAppStep2() {
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -227,28 +235,28 @@ class SplashActivity:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION
 
-            )
+        )
 
-       if((Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)){
-           permission.add(Manifest.permission.ANSWER_PHONE_CALLS)
-        }else{
-           permission.add(Manifest.permission.READ_PHONE_STATE)
+        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)) {
+            permission.add(Manifest.permission.ANSWER_PHONE_CALLS)
+        } else {
+            permission.add(Manifest.permission.READ_PHONE_STATE)
 
-       }
+        }
 
         var validatePermission = permission.map { rxPermissions.isGranted(it) }
 
-        if( !validatePermission.contains(false)) {
+        if (!validatePermission.contains(false)) {
             executeLocationStep3()
             return
         }
 
-        if(countPermission==0){
+        if (countPermission == 0) {
             executeLocationStep3()
             return
         }
 
-        var permissionValidate =0
+        var permissionValidate = 0
 
 
         rxPermissions.setLogging(true)
@@ -256,8 +264,8 @@ class SplashActivity:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
         rxPermissions.request(
             *permission.toTypedArray()
         ).subscribe {
-            if (!it){
-                if(showMessage) {
+            if (!it) {
+                if (showMessage) {
                     showDialog(
                         TypeDialog.ERROR,
                         title = "Permisos requeridos",
@@ -270,9 +278,9 @@ class SplashActivity:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
 
                         })
                 }
-            }else{
+            } else {
                 permissionValidate++
-                if(permissionValidate ==1){
+                if (permissionValidate == 1) {
                     executeLocationStep3()
                 }
             }

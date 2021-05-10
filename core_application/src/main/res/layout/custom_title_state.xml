@@ -12,9 +12,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="¿De donde nos visitas?"
         android:layout_gravity="center"
-        android:textSize="20dp"
-        android:textColor="@android:color/white" />
+        android:text="¿De donde nos visitas?"
+        android:textColor="@android:color/white"
+        android:textSize="20dp" />
 
 </LinearLayout>
