@@ -6,15 +6,12 @@ import android.content.pm.PackageManager
 import android.os.AsyncTask
 import android.util.Log
 import androidx.annotation.RawRes
-import com.blankj.utilcode.util.LogUtils
-import com.google.common.reflect.Reflection.getPackageName
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import com.s10plus.core_application.BuildConfig
 import com.s10plus.core_application.GlobalSettings
-import com.s10plus.core_application.R
 import com.s10plus.core_application.S10PlusApplication
-import com.s10plus.core_application.base_ui.ActivityUtils
 import com.s10plus.core_application.base_ui.BaseViewModel
 import com.s10plus.core_application.commons.AbstractComponentAdapter
 import com.s10plus.core_application.commons.AbstractLayoutAdapter
@@ -23,7 +20,6 @@ import com.s10plus.core_application.models.AbstractLayoutModel
 import com.s10plus.core_application.sound.FileService
 import com.s10plus.core_application.utils.JsonUtil
 import com.s10plus.core_application.utils.Storage
-import java.io.InputStream
 
 class ConfigurationViewModel:BaseViewModel() {
 
@@ -33,18 +29,35 @@ class ConfigurationViewModel:BaseViewModel() {
 
     fun loadConfigurationCache() {
 
+        var startUpdate = GlobalSettings.validateUpdate()
 
-        if(!GlobalSettings.isConfig()){
-            var config = readRawJson<Configuration>(R.raw.config)
+        if (startUpdate) {
 
-            setup(config)
 
-        }else{
-            GlobalSettings.config = JsonUtil.fromConfiguration(Storage.getFileText(Storage.nameConfig))
-            success.value="continue"
-            Log.d(TAG,"Configuracion Lista")
-            // GlobalSettings.setIsConfig(true)
+            setupSubscribe(tokenService.getConfig(BuildConfig.ID_APP),
+                {
 
+                    if (!GlobalSettings.isConfig())
+                        setup(configuration = it.data, true)
+                    else
+                        setup(configuration = it.data, false)
+
+
+                }, {
+
+                    GlobalSettings.saveUpdateConfig()
+                    GlobalSettings.config =
+                        JsonUtil.fromConfiguration(Storage.getFileText(Storage.nameConfig))
+                    success.value = "continue"
+                    Log.d(TAG, "Configuracion Lista")
+                })
+
+
+        } else {
+            GlobalSettings.config =
+                JsonUtil.fromConfiguration(Storage.getFileText(Storage.nameConfig))
+            success.value = "continue"
+            Log.d(TAG, "Configuracion Lista")
         }
 
 
@@ -75,41 +88,49 @@ class ConfigurationViewModel:BaseViewModel() {
 
     }
 
-    private fun setup(configuration: Configuration){
+    private fun setup(configuration: Configuration, rebirth: Boolean = true) {
         GlobalSettings.setPhones(configuration.preconfiguration.requestPhone.interceptorsPhone)
         GlobalSettings.config = configuration
-        var json  =Gson().toJson(configuration)
-        Storage.writeToDisk(json.toByteArray(),Storage.nameConfig)
-        saveSound(configuration.preconfiguration.sound)
+        var json = Gson().toJson(configuration)
+        Storage.writeToDisk(json.toByteArray(), Storage.nameConfig)
+        saveSound(configuration.preconfiguration.sound, rebirth)
 
 
     }
 
 
-
-    private fun saveSound(url:String){
-        if (url.isNullOrEmpty()){
-            triggerRebirth(S10PlusApplication.currentApplication)
+    private fun saveSound(url: String, rebirth: Boolean = true) {
+        if (url.isNullOrEmpty()) {
+            if (rebirth)
+                triggerRebirth(S10PlusApplication.currentApplication)
             GlobalSettings.setIsConfig(true)
+            GlobalSettings.saveUpdateConfig()
+
             return
         }
         setupSubscribe(service.downloadFile(url), {
-            Storage.writeResponseBodyToDisk(it,"sound.mp3");
+            Storage.writeResponseBodyToDisk(it, "sound.mp3")
 
-            Log.d(TAG,"Sound Download")
+            Log.d(TAG, "Sound Download")
             GlobalSettings.setIsConfig(true)
+            GlobalSettings.saveUpdateConfig()
 
+            if (rebirth) {
+                AsyncTask.execute {
+                    Thread.sleep(3000)
+                    triggerRebirth(S10PlusApplication.currentApplication)
+                }
+            } else {
+                success.value = "continue"
 
-            AsyncTask.execute {
-                Thread.sleep(3000)
-                triggerRebirth(S10PlusApplication.currentApplication)
             }
 
-        },{
+        }, {
 
-            triggerRebirth(S10PlusApplication.currentApplication)
+            if (rebirth)
+                triggerRebirth(S10PlusApplication.currentApplication)
 
-            Log.d(TAG,"OK")
+            Log.d(TAG, "OK")
 
         })
 

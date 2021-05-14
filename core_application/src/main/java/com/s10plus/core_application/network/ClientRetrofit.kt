@@ -7,6 +7,7 @@ import androidx.annotation.RequiresApi
 import com.google.gson.Gson
 import com.s10plus.core_application.BuildConfig
 import com.s10plus.core_application.S10PlusApplication
+import com.s10plus.core_application.utils.JsonUtil
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -19,7 +20,10 @@ import java.security.cert.Certificate
 import java.security.cert.CertificateFactory
 import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
-import javax.net.ssl.*
+import javax.net.ssl.SSLContext
+import javax.net.ssl.TrustManager
+import javax.net.ssl.TrustManagerFactory
+import javax.net.ssl.X509TrustManager
 
 
 object  ClientRetrofit {
@@ -63,7 +67,7 @@ object  ClientRetrofit {
                 .client(UnsafeOkHttpClient.unsafeOkHttpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(Gson()))
+                .addConverterFactory(GsonConverterFactory.create(JsonUtil.gsonBuilderS10()))
                 .addConverterFactory(JaxbConverterFactory.create())
                 .build()
             retrofit!!

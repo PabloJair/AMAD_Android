@@ -2,8 +2,6 @@ package com.s10plus.amad
 
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatDelegate
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.s10plus.amad.databinding.ActivityMainBinding
 import com.s10plus.core_application.GlobalSettings
 import com.s10plus.core_application.analytics.AnalyticsViewModel
@@ -92,9 +90,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun init() {
         Picasso.get().isLoggingEnabled = true
-        Picasso.get().setIndicatorsEnabled(true)
+        //Picasso.get().setIndicatorsEnabled(true)
 
-        val db = Firebase.firestore
+        //val db = Firebase.firestore
 
 
         /*db.collection("/test").document("EekyX3rNZzkicutjVIyG")

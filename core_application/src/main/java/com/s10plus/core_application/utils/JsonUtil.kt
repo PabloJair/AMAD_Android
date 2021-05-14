@@ -9,7 +9,6 @@ import com.s10plus.core_application.configuration.Configuration
 import com.s10plus.core_application.models.AbstractComponentModel
 import com.s10plus.core_application.models.AbstractLayoutModel
 import com.s10plus.core_application.models.ViewS10Plus
-import java.lang.reflect.Type
 
 
 object JsonUtil {
@@ -28,15 +27,23 @@ object JsonUtil {
         return  GsonBuilder()
             .registerTypeAdapter(AbstractLayoutModel::class.java, AbstractLayoutAdapter())
             .registerTypeAdapter(AbstractComponentModel::class.java, AbstractComponentAdapter())
-            .setPrettyPrinting().create().fromJson(json,ViewS10Plus::class.java)
+            .setPrettyPrinting().create().fromJson(json, ViewS10Plus::class.java)
     }
 
     fun fromConfiguration(json: String): Configuration {
 
-        return  GsonBuilder()
+        return GsonBuilder()
             .registerTypeAdapter(AbstractLayoutModel::class.java, AbstractLayoutAdapter())
             .registerTypeAdapter(AbstractComponentModel::class.java, AbstractComponentAdapter())
-            .setPrettyPrinting().create().fromJson(json,Configuration::class.java)
+            .setPrettyPrinting().create().fromJson(json, Configuration::class.java)
     }
+
+    fun gsonBuilderS10(): Gson {
+        return GsonBuilder()
+            .registerTypeAdapter(AbstractLayoutModel::class.java, AbstractLayoutAdapter())
+            .registerTypeAdapter(AbstractComponentModel::class.java, AbstractComponentAdapter())
+            .setPrettyPrinting().create()
+    }
+
 
 }

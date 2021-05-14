@@ -9,7 +9,6 @@ import android.net.Uri
 import android.os.AsyncTask
 import android.os.Build
 import android.provider.Settings
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.net.toUri
@@ -17,7 +16,6 @@ import com.blankj.utilcode.util.KeyboardUtils
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
-import com.google.gson.Gson
 import com.s10plus.amad.databinding.ActivitySplashBinding
 import com.s10plus.core_application.CallReceiverService
 import com.s10plus.core_application.GlobalSettings
@@ -47,10 +45,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
 
     override fun setupView() {
         viewNumber = DialogPhoneBinding.inflate(LayoutInflater.from(this), null, false)
-
-
-        var json = Gson().toJson(GlobalSettings.config)
-        Log.d("", json)
     }
 
     override fun setupViewModel() {

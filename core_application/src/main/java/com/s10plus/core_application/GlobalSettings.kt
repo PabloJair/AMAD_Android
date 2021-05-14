@@ -9,20 +9,20 @@ import com.s10plus.core_application.mocks.*
 import com.s10plus.core_application.models.UserInformation
 import com.s10plus.core_application.models.ViewS10Plus
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 object GlobalSettings {
 
 
-    var saveReceiverCall = true ;
-    const val USER="USER"
+    var saveReceiverCall = true
+    const val USER = "USER"
     const val SP_S10PLUS="SP_S10PLUS-AMAD"
     const val TOKEN="TOKEN"
     const val SERIAL="SERIAL"
     const val STATE="STATE"
     const val ISCONFIG="ISCONFIG"
-    const val PHONES="PHONES"
+    const val PHONES = "PHONES"
+    const val LASTUPDATE = "LASTUPDATE"
 
      var config:Configuration =Configuration(
 
@@ -69,20 +69,42 @@ object GlobalSettings {
         SPUtils.getInstance(SP_S10PLUS, Context.MODE_PRIVATE).put(ISCONFIG, isConfig)
 
     fun isConfig():Boolean=
-        SPUtils.getInstance(SP_S10PLUS, Context.MODE_PRIVATE).getBoolean(ISCONFIG,false)
+        SPUtils.getInstance(SP_S10PLUS, Context.MODE_PRIVATE).getBoolean(ISCONFIG, false)
 
 
-    fun  getView(id:String):ViewS10Plus?=config.views.find { it.id == id }
+    fun getView(id: String): ViewS10Plus? = config.views.find { it.id == id }
 
 
-    fun getNumberPhone():String{
+    fun getNumberPhone(): String {
         val np = SPUtils.getInstance(SP_S10PLUS, Context.MODE_PRIVATE).getString(SP_NUMBER_PHONE)
-        return if(np.isEmpty()) PHONE_1 else np
+        return if (np.isEmpty()) PHONE_1 else np
 
     }
 
+    fun saveUpdateConfig() {
+        val now = Calendar.getInstance()
+        now.add(Calendar.MINUTE, 5)
+        SPUtils.getInstance(SP_S10PLUS, Context.MODE_PRIVATE)
+            .put(LASTUPDATE, now.timeInMillis)
 
-    fun saveInterceptorPhone(isInterceptor: Boolean, phoneNumber: String = ""){
+        /*var dateFormat: DateFormat = SimpleDateFormat("yyyy-mm-dd hh:mm:ss")
+        var strDate = dateFormat.format(lastUpdate.time)
+        strDate*/
+
+    }
+
+    fun validateUpdate(): Boolean {
+        var cacheUpdate = SPUtils.getInstance(SP_S10PLUS, Context.MODE_PRIVATE).getLong(
+            LASTUPDATE
+        )
+
+        var lastUpdate = Calendar.getInstance()
+        lastUpdate.timeInMillis = cacheUpdate
+        return Calendar.getInstance() > lastUpdate
+
+    }
+
+    fun saveInterceptorPhone(isInterceptor: Boolean, phoneNumber: String = "") {
         SPUtils.getInstance(SP_S10PLUS, Context.MODE_PRIVATE)
             .put(SP_INTERCEPTER_PHONE, isInterceptor)
 
@@ -90,7 +112,8 @@ object GlobalSettings {
             .put(SP_NUMBER_PHONE, phoneNumber)
 
     }
-    fun getToken():String=
+
+    fun getToken(): String =
         if(token==null) {
             token = SPUtils.getInstance(SP_S10PLUS, Context.MODE_PRIVATE).getString(TOKEN)
             token!!
